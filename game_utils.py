@@ -29,13 +29,13 @@ def getScreen(x,y,bgWidth, bgHeight, radius):
         
         if square == 1: 
             possible.remove(1)
-            possible.append((1,(x - bgWidth) % (2 * bgWidth),y))
+            possible.append((1,x - bgWidth,y))
         
         if square == 2: 
             possible.remove(2)
-            possible.append((2,x,(y - bgHeight) % (2 * bgHeight)))
+            possible.append((2,x,y - bgHeight))
 
         if square == 3: 
             possible.remove(3)
-            possible.append((3,(x - bgWidth) % (2 * bgWidth),(y - bgHeight) % (2 * bgHeight)))
+            possible.append((3,x - bgWidth,y - bgHeight))
 
