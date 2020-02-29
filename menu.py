@@ -31,7 +31,11 @@ def text_format(message, textFont, textSize, textColor):
 
 
 # Game Fonts
-font = "arial"
+font = 'comicsans'
+
+
+# Game image
+penguin_img = pygame.transform.scale(pygame.image.load("./images/penguinTitle.png"), (500,500))
 
 
 # Game Framerate
@@ -64,6 +68,7 @@ def main_menu():
         # Main Menu UI
         screen.fill(white)
         title=text_format("Malfunctioning Penguin", font, 90, blue)
+        screen.blit(penguin_img, (262, 300))
         if selected=="start":
             text_start=text_format("START", font, 75, blue)
         else:
