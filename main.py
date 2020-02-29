@@ -62,7 +62,7 @@ def redrawWindow():
     win.blit(bg, (bg_xend,bg_yend))
     win.blit(bg, (bg_xstart,bg_yend))
     win.blit(bg, (bg_xend,bg_ystart))
-    draw_text(win, str(round(frame_time/1000)), 25, 450, 10)
+    draw_text(win, str(round(frame_time/1000)), 25, W-50, 10)
     
     penguin.draw(win)
     for obstacle in obstacles:
@@ -70,11 +70,9 @@ def redrawWindow():
 
     pygame.draw.rect(win,Color(0,255,0),Rect(0,bg_ystart,100,10))
     pygame.draw.rect(win,Color(255,0,0),Rect(50,bg_yend,100,10))
-    largeFont = pygame.font.SysFont('comicsans', 30)
-    text = largeFont.render('Score: ' + str(score), 1, (255,255,255))
-
-
-    win.blit(text, (700, 10))
+    # largeFont = pygame.font.SysFont('comicsans', 30)
+    # text = largeFont.render('Score: ' + str(score), 1, (255,255,255))
+    # win.blit(text, (700, 10))
     pygame.display.update()
 
 
