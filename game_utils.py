@@ -24,17 +24,25 @@ def get_screen(x,y,bgWidth, bgHeight, radius):
 
     if 0 in possible:
         possible.remove(0)
-        possible.append((0,x,y))
+        possible.append((0,
+            x if x <= bgWidth + radius else x - 2 * bgWidth,
+            y if y <= bgHeight + radius else y - 2 * bgHeight))
     
     if 1 in possible:
         possible.remove(1)
-        possible.append((1,x - bgWidth,y))
+        possible.append((1,
+            x - bgWidth,
+            y if y <= bgHeight + radius else y - 2 * bgHeight))
     
     if 2 in possible: 
         possible.remove(2)
-        possible.append((2,x,y - bgHeight))
+        possible.append((2,
+            x if x <= bgWidth + radius else x - 2 * bgWidth,
+            y - bgHeight))
 
     if 3 in possible:
         possible.remove(3)
-        possible.append((3,x - bgWidth,y - bgHeight))
+        possible.append((3,
+            x - bgWidth,
+            y - bgHeight))
 
