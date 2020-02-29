@@ -5,7 +5,7 @@ import random
 
 pygame.init()
 
-W, H = 600, 900
+W, H = 500, 800
 win = pygame.display.set_mode((W,H))
 pygame.display.set_caption('Malfunctioning Penguin')
 
@@ -13,6 +13,8 @@ orig_bg = pygame.image.load(os.path.join('images', 'background.png')).convert()
 bg = orig_bg.copy()
 bg_ystart = 0
 bg_yend = bg.get_height()
+bg_xstart = 0
+bg_xend = bg.get_width()
 
 clock = pygame.time.Clock()
 
@@ -105,15 +107,17 @@ def endScreen():
 
 def redrawWindow():
     largeFont = pygame.font.SysFont('comicsans', 30)
-    win.blit(bg, (0,+bg_ystart))
-    win.blit(bg, (0,+bg_yend))
+    win.blit(bg, (bg_xstart,bg_ystart))
+    win.blit(bg, (bg_xend,bg_yend))
+    win.blit(bg, (bg_xstart,bg_yend))
+    win.blit(bg, (bg_xend,bg_ystart))
     text = largeFont.render('Score: ' + str(score), 1, (255,255,255))
     runner.draw(win)
     for obstacle in obstacles:
         obstacle.draw(win)
 
-    pygame.draw.rect(win,Color(0,255,0),Rect(0,int(bg_ystart),100,10))
-    pygame.draw.rect(win,Color(255,0,0),Rect(50,int(bg_yend),100,10))
+    pygame.draw.rect(win,Color(0,255,0),Rect(0,bg_ystart,100,10))
+    pygame.draw.rect(win,Color(255,0,0),Rect(50,bg_yend,100,10))
 
 
     win.blit(text, (700, 10))
@@ -132,8 +136,13 @@ obstacles = []
 pause = 0
 fallSpeed = 0
 
+direction = 1
+last_dir_flip = 0
+
 while run:
     delta_time = clock.get_time()/1000
+    frame_time = pygame.time.get_ticks()
+
     if pause > 0:
         pause += 1
         if pause > fallSpeed * 2:
@@ -141,12 +150,23 @@ while run:
 
 
     # scrolling of the background
-    bg_ystart += 400 * delta_time
-    bg_yend += 400 * delta_time
+    bg_ystart += 2
+    bg_yend += 2
     if bg_ystart > bg.get_height():
         bg_ystart = bg_ystart - 2*bg.get_height()
     if bg_yend > bg.get_height():
         bg_yend = bg_yend - 2*bg.get_height()
+
+    bg_xstart += 2 * direction
+    bg_xend += 2 * direction
+    if bg_xstart > bg.get_width():
+        bg_xstart = bg_xstart - 2*bg.get_height()
+    if bg_xstart < bg.get_width() * -1:
+        bg_xstart = bg_xstart + 2*bg.get_height()
+    if bg_xend > bg.get_width():
+        bg_xend = bg_xend - 2*bg.get_height()
+    if bg_xend < bg.get_width() * -1:
+        bg_xend = bg_xend + 2*bg.get_height()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -161,8 +181,9 @@ while run:
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
-            if not(runner.jumping):
-                runner.jumping = True
+            if frame_time - last_dir_flip > 200:
+                direction *= -1
+                last_dir_flip = frame_time
 
         if keys[pygame.K_DOWN]:
             if not(runner.sliding):
