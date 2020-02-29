@@ -4,27 +4,27 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.interpolate as sp
 from scipy import optimize
+import random as rn 
+import math
 
+def getMusic():
+    sample_rate = 100
 
-sample_rate = 100
-plt.figure(figsize=(20, 2))
+    filename = '/Users/gabi/Documents/penguin/joakim_karud-rock_angel.wav'
+    data, sample_rate = librosa.load(filename, sr=sample_rate, mono=True, offset=0.0, res_type='kaiser_best')
 
-filename = '/Users/gabi/Documents/penguin/joakim_karud-rock_angel.wav'
-data, sample_rate = librosa.load(filename, sr=sample_rate, mono=True, offset=0.0, res_type='kaiser_best')
+    data = np.array([i for i in data if i >= 0])
+    time = len(data) // 100
+    data = np.take(data, [i for i in range(time * 100)])
 
-data = np.array([i for i in data if i >= 0])
-time = len(data)
-# plt.plot([i for i in range(time)], data)
+    data = np.reshape(data, (time, 100))
+    data = [np.mean(row) for row in data]
+    time = [i for i in range(time)]
 
-time = len(data) // 100
-data = np.take(data, [i for i in range(time * 100)])
+    f = sp.CubicSpline(time, data)
 
-data = np.reshape(data, (time, 100))
-data = [np.mean(row) for row in data]
-time = [i for i in range(time)]
-
-f = sp.CubicSpline(time, data)
-# plt.plot(time, sp.CubicSpline(time, data))
-t = np.arange(0.0,100.0,0.1)
-plt.plot(t, f(t))
-plt.show()
+def getWidth(time, lastWidth, totalLength):
+    maxWidth = 50 - math.ceil((time / totalLength) * 40)
+    minWidth = maxWidth // 2
+    newWidth = lastWidth + rn.randint(-1,1)
+    return min(maxWidth, max(minWidth, newWidth))
