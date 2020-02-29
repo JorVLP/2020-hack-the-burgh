@@ -15,12 +15,12 @@ def getScreen(x,y,bgWidth, bgHeight, radius):
         possible.remove(2)
 
     if 0 <= y - radius and y + radius <= bgHeight:
-        possible.remove(2)
-        possible.remove(3)
+        if 2 in possible: possible.remove(2)
+        if 3 in possible: possible.remove(3)
 
     if bgHeight <= y - radius and y + radius <= 2 * bgHeight:
-        possible.remove(0)
-        possible.remove(1)
+        if 0 in possible: possible.remove(0)
+        if 1 in possible: possible.remove(1)
 
     for square in possible:
         if square == 0: 
