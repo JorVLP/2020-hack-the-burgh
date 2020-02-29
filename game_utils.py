@@ -1,6 +1,6 @@
 
 
-def getScreen(x,y,bgWidth, bgHeight, radius):
+def get_screen(x,y,bgWidth, bgHeight, radius):
     possible = [i for i in range(4)]
     
     x = x % (2 * bgWidth) 
