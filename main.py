@@ -47,12 +47,15 @@ def endScreen():
 
         win.blit(bg, (0,0))
         largeFont = pygame.font.SysFont('comicsans', 80)
-        #lastScore = largeFont.render('Best Score: ' + str(updateFile()),1,(255,255,255))
-        #currentScore = largeFont.render('Score: '+ str(score),1,(255,255,255))
-        lastScore = largeFont.render('Best Score: ',1,(255,255,255))
-        currentScore = largeFont.render('Score: ',1,(255,255,255))
-        win.blit(lastScore, (W/2 - lastScore.get_width()/2,150))
-        win.blit(currentScore, (W/2 - currentScore.get_width()/2, 240))
+        # lastScore = largeFont.render('Best Score: ' + str(updateFile()),1,(255,255,255))
+        # currentScore = largeFont.render('Score: '+ str(score),1,(255,255,255))
+        game_over = largeFont.render('Game Over',1,(0,0,0))
+        plushie = largeFont.render('Where\'s my plushie..? :( ',1,(0,0,0))
+
+        crying = pygame.image.load(os.path.join('images', 'cryingPinguin.png'))
+        win.blit(crying, (W/2.5, H/2))
+        win.blit(game_over, (W/2 - game_over.get_width()/2,150))
+        win.blit(plushie, (W/2 - plushie.get_width()/2, 240))
         pygame.display.update()
     score = 0
 
