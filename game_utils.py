@@ -22,20 +22,19 @@ def getScreen(x,y,bgWidth, bgHeight, radius):
         if 0 in possible: possible.remove(0)
         if 1 in possible: possible.remove(1)
 
-    for square in possible:
-        if square == 0: 
-            possible.remove(0)
-            possible.append((0,x,y))
-        
-        if square == 1: 
-            possible.remove(1)
-            possible.append((1,x - bgWidth,y))
-        
-        if square == 2: 
-            possible.remove(2)
-            possible.append((2,x,y - bgHeight))
+    if 0 in possible:
+        possible.remove(0)
+        possible.append((0,x,y))
+    
+    if 1 in possible:
+        possible.remove(1)
+        possible.append((1,x - bgWidth,y))
+    
+    if 2 in possible: 
+        possible.remove(2)
+        possible.append((2,x,y - bgHeight))
 
-        if square == 3: 
-            possible.remove(3)
-            possible.append((3,x - bgWidth,y - bgHeight))
+    if 3 in possible:
+        possible.remove(3)
+        possible.append((3,x - bgWidth,y - bgHeight))
 
