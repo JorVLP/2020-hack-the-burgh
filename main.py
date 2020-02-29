@@ -9,9 +9,10 @@ W, H = 600, 900
 win = pygame.display.set_mode((W,H))
 pygame.display.set_caption('Malfunctioning Penguin')
 
-bg = pygame.image.load(os.path.join('images', 'bg.png')).convert()
+orig_bg = pygame.image.load(os.path.join('images', 'background.png')).convert()
+bg = orig_bg.copy()
 bg_ystart = 0
-bg_yend = bg.get_width()
+bg_yend = bg.get_height()
 
 clock = pygame.time.Clock()
 
@@ -76,9 +77,8 @@ class player(object):
         #pygame.draw.rect(win, (255,0,0),self.hitbox, 2)
 
 def endScreen():
-    global pause, score, speed, obstacles
+    global pause, score, obstacles
     pause = 0
-    speed = 30
     obstacles = []
 
     run = True
@@ -105,12 +105,16 @@ def endScreen():
 
 def redrawWindow():
     largeFont = pygame.font.SysFont('comicsans', 30)
-    win.blit(bg, (bg_ystart, 0))
-    win.blit(bg, (bg_yend,0))
+    win.blit(bg, (0,+bg_ystart))
+    win.blit(bg, (0,+bg_yend))
     text = largeFont.render('Score: ' + str(score), 1, (255,255,255))
     runner.draw(win)
     for obstacle in obstacles:
         obstacle.draw(win)
+
+    pygame.draw.rect(win,Color(0,255,0),Rect(0,int(bg_ystart),100,10))
+    pygame.draw.rect(win,Color(255,0,0),Rect(50,int(bg_yend),100,10))
+
 
     win.blit(text, (700, 10))
     pygame.display.update()
@@ -118,7 +122,6 @@ def redrawWindow():
 
 pygame.time.set_timer(USEREVENT+1, 500)
 pygame.time.set_timer(USEREVENT+2, 3000)
-speed = 30
 
 score = 0
 
@@ -130,22 +133,20 @@ pause = 0
 fallSpeed = 0
 
 while run:
+    delta_time = clock.get_time()/1000
     if pause > 0:
         pause += 1
         if pause > fallSpeed * 2:
             endScreen()
 
-    score = speed//10 - 3
-    pygame.draw.rect(bg,Color(255,0,0),Rect(0,0,1000,100))
 
-
-    bg_ystart -= 1.4
-    bg_yend -= 1.4
-
-    if bg_ystart < bg.get_width() * -1:
-        bg_ystart = bg.get_width()
-    if bg_yend < bg.get_width() * -1:
-        bg_yend = bg.get_width()
+    # scrolling of the background
+    bg_ystart += 400 * delta_time
+    bg_yend += 400 * delta_time
+    if bg_ystart > bg.get_height():
+        bg_ystart = bg_ystart - 2*bg.get_height()
+    if bg_yend > bg.get_height():
+        bg_yend = bg_yend - 2*bg.get_height()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -153,7 +154,7 @@ while run:
             run = False
 
         if event.type == USEREVENT+1:
-            speed += 1
+            pass
 
 
     if runner.falling == False:
@@ -167,5 +168,5 @@ while run:
             if not(runner.sliding):
                 runner.sliding = True
 
-    clock.tick(speed)
+    clock.tick(60)
     redrawWindow()
