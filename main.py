@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import *
 import os
 import random
-from PIL import Image
 
 pygame.init()
 
@@ -19,71 +18,25 @@ bg_xend = bg.get_width()
 
 clock = pygame.time.Clock()
 
-class player(object):
-    goingLeft = pygame.image.load(os.path.join('images', 'penguinLeft.png'))
-    goingRight = pygame.image.load(os.path.join('images', 'penguinRight.png'))
-    run = pygame.image.load(os.path.join('images', 'penguinRight.png'))
-    jump = [pygame.image.load(os.path.join('images', str(x) + '.png')) for x in range(1, 8)]
-    slide = [pygame.image.load(os.path.join('images', 'S1.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')),pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S3.png')), pygame.image.load(os.path.join('images', 'S4.png')), pygame.image.load(os.path.join('images', 'S5.png'))]
-    fall = pygame.image.load(os.path.join('images', 'penguinRight.png'))
-    jumpList = [1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,-1,-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4]
+class Player(object):
+    face_left = pygame.image.load(os.path.join('images', 'penguinLeft.png'))
+    face_right = pygame.image.load(os.path.join('images', 'penguinRight.png'))
 
     def __init__(self, x, y, width, height):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
-        self.goLeft = True
-        self.jumping = False
-        self.sliding = False
-        self.falling = False
-        self.slideCount = 0
-        self.jumpCount = 0
-        self.runCount = 0
-        self.slideUp = False
+        self.go_left = True
+    
+    def change_direction(self):
+        self.go_left = not self.go_left
 
     def draw(self, win):
-        if self.goLeft:
-            win.blit(self.goingLeft, (self.x, self.y))
-        elif not self.goLeft:
-            win.blit(self.goingRight, (self.x, self.y))
-        
-        elif self.falling:
-            win.blit(self.fall, (self.x, self.y + 30))
-        elif self.jumping:
-            self.y -= self.jumpList[self.jumpCount] * 1.3
-            win.blit(self.jump[self.jumpCount//18], (self.x, self.y))
-            self.jumpCount += 1
-            if self.jumpCount > 108:
-                self.jumpCount = 0
-                self.jumping = False
-                self.runCount = 0
-            self.hitbox = (self.x+ 4, self.y, self.width-24, self.height-10)
-        elif self.sliding or self.slideUp:
-            if self.slideCount < 20:
-                self.y += 1
-                self.hitbox = (self.x+ 4, self.y, self.width-24, self.height-10)
-            elif self.slideCount == 80:
-                self.y -= 19
-                self.sliding = False
-                self.slideUp = True
-            elif self.slideCount > 20 and self.slideCount < 80:
-                self.hitbox = (self.x, self.y+3, self.width-8, self.height-35)
-
-            if self.slideCount >= 110:
-                self.slideCount = 0
-                self.runCount = 0
-                self.slideUp = False
-                self.hitbox = (self.x+ 4, self.y, self.width-24, self.height-10)
-            win.blit(self.slide[self.slideCount//10], (self.x, self.y))
-            self.slideCount += 1
-
+        if self.go_left:
+            win.blit(self.face_left, (self.x, self.y))
         else:
-            if self.runCount > 42:
-                self.runCount = 0
-            win.blit(self.run, (self.x,self.y))
-            self.runCount += 1
-            self.hitbox = (self.x+ 4, self.y, self.width-24, self.height-13)
+            win.blit(self.face_right, (self.x, self.y))
 
         #pygame.draw.rect(win, (255,0,0),self.hitbox, 2)
 
@@ -99,11 +52,6 @@ def endScreen():
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                run = False
-                runner.falling = False
-                runner.sliding = False
-                runner.jumpin = False
 
         win.blit(bg, (0,0))
         largeFont = pygame.font.SysFont('comicsans', 80)
@@ -115,18 +63,20 @@ def endScreen():
     score = 0
 
 def redrawWindow():
-    largeFont = pygame.font.SysFont('comicsans', 30)
+
     win.blit(bg, (bg_xstart,bg_ystart))
     win.blit(bg, (bg_xend,bg_yend))
     win.blit(bg, (bg_xstart,bg_yend))
     win.blit(bg, (bg_xend,bg_ystart))
-    text = largeFont.render('Score: ' + str(score), 1, (255,255,255))
-    runner.draw(win)
+    
+    penguin.draw(win)
     for obstacle in obstacles:
         obstacle.draw(win)
 
     pygame.draw.rect(win,Color(0,255,0),Rect(0,bg_ystart,100,10))
     pygame.draw.rect(win,Color(255,0,0),Rect(50,bg_yend,100,10))
+    largeFont = pygame.font.SysFont('comicsans', 30)
+    text = largeFont.render('Score: ' + str(score), 1, (255,255,255))
 
 
     win.blit(text, (700, 10))
@@ -139,7 +89,9 @@ pygame.time.set_timer(USEREVENT+2, 3000)
 score = 0
 
 run = True
-runner = player(250, 600, 50, 50)
+PENG_WIDTH = 123
+PENG_HEIGHT = 110
+penguin = Player((win.get_width()-PENG_WIDTH)/2, win.get_height()-PENG_HEIGHT-30, 50, 50)
 
 obstacles = []
 pause = 0
@@ -186,17 +138,16 @@ while run:
             pass
 
 
-    if runner.falling == False:
-        keys = pygame.key.get_pressed()
+    keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
-            if frame_time - last_dir_flip > 200:
-                direction *= -1
-                last_dir_flip = frame_time
+    if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
+        if frame_time - last_dir_flip > 200:
+            direction *= -1
+            penguin.change_direction()
+            last_dir_flip = frame_time
 
-        if keys[pygame.K_DOWN]:
-            if not(runner.sliding):
-                runner.sliding = True
+    if keys[pygame.K_DOWN]:
+        pass
 
     clock.tick(60)
     redrawWindow()
