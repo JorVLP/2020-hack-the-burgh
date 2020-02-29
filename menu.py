@@ -1,5 +1,6 @@
-import pygame
+import pygame.draw
 from pygame.locals import *
+import pygame
 import time
 import random
 import os
@@ -21,14 +22,8 @@ red=(234,65,123)
 green=(0, 255, 0)
 blue=(122,246,246)
 yellow=(255, 255, 0)
- 
-
-# Text Renderer
-def text_format(message, textFont, textSize, textColor):
-    newFont=pygame.font.SysFont(textFont, textSize)
-    newText=newFont.render(message, 0, textColor)
-    return newText
-
+bright_red = (255,0,0)
+bright_green = (0,255,0)
 
 # Game Fonts
 font = 'Retro'
@@ -42,7 +37,13 @@ penguin_img = pygame.transform.scale(pygame.image.load("./images/penguinTitle.pn
 clock = pygame.time.Clock()
 FPS=30
 
-# Main Menu
+# Text Renderer
+def text_format(message, textFont, textSize, textColor):
+    newFont=pygame.font.SysFont(textFont, textSize)
+    newText=newFont.render(message, 0, textColor)
+    return newText
+
+#Main Menu
 def main_menu():
  
     menu=True
@@ -58,7 +59,7 @@ def main_menu():
                     selected="start"
                 elif event.key==pygame.K_DOWN:
                     selected="quit"
-                if event.key==pygame.K_RETURN:
+                if event.key==pygame.K_SPACE:
                     if selected=="start":
                         print("Start")
                     if selected=="quit":
@@ -70,11 +71,11 @@ def main_menu():
         title=text_format("Malfunctioning Penguin", font, 90, blue)
         screen.blit(penguin_img, (262, 120))
         if selected=="start":
-            text_start=text_format("START", font, 75, red)
+            text_start = text_format("START", font, 75, red)
         else:
             text_start = text_format("START", font, 75, black)
         if selected=="quit":
-            text_quit=text_format("QUIT", font, 75, black)
+            text_quit=text_format("QUIT", font, 75, red)
         else:
             text_quit = text_format("QUIT", font, 75, black)
  
@@ -89,20 +90,5 @@ def main_menu():
         pygame.display.update()
         clock.tick(FPS)
         pygame.display.set_caption("Python - Pygame Simple Main Menu Selection")
-
-        while True:
-            for event in pygame.event.get():
-                if(start_rect.collidepoint(pygame.mouse.get_pos())):
-                    pygame.quit()
-                    quit()
-                if(event.type == pygame.MOUSEBUTTONDOWN and event.start_rect== 1):
-                    pygame.quit()
-                    quit()
-                elif(event.type == pygame.MOUSEBUTTONDOWN and event.quit_rect==1):
-                    pygame.quit()
-                    quit()
-                elif(event.type == pygame.QUIT):
-                    pygame.quit()
-                    quit()
 
 main_menu()
