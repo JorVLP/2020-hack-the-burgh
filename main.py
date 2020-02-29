@@ -1,7 +1,6 @@
 import pygame
-from pygame.locals import *
+from pygame.locals import Color,Rect
 import os
-import random
 from player import Player
 import game_utils
 
