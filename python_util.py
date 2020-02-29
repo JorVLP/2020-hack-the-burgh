@@ -7,11 +7,11 @@ from scipy import optimize
 import random as rn 
 import math
 
-def getMusic():
-    sample_rate = 100
+def getFun(music):
+    #sample_rate = 100
 
-    filename = '/Users/gabi/Documents/penguin/joakim_karud-rock_angel.wav'
-    data, sample_rate = librosa.load(filename, sr=sample_rate, mono=True, offset=0.0, res_type='kaiser_best')
+    #filename = '/Users/gabi/Documents/penguin/joakim_karud-rock_angel.wav'
+    data, sample_rate = librosa.load(music, sr=100, mono=True, offset=0.0, res_type='kaiser_best')
 
     data = np.array([i for i in data if i >= 0])
     time = len(data) // 100
@@ -19,9 +19,10 @@ def getMusic():
 
     data = np.reshape(data, (time, 100))
     data = [np.mean(row) for row in data]
-    time = [i for i in range(time)]
+    #time = [i for i in range(time)]
 
-    f = sp.CubicSpline(time, data)
+    #f = sp.CubicSpline(time, data)
+    return (sp.CubicSpline([i for i in range(time)], data), time)
 
 def getWidth(time, lastWidth, totalLength):
     maxWidth = 50 - math.ceil((time / totalLength) * 40)

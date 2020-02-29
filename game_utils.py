@@ -1,25 +1,29 @@
 import pygame
+import python_util 
 
 path_x, path_radius = (0,50)
+pathFunction, totalLength = python_util.getFun("./joakim_karud-rock_angel.wav")
 
 def plot_path(time):
     global path_x, path_radius
 
-    keys = pygame.key.get_pressed()
+    return (pathFunction(time), python_util.getWidth(time, path_radius, totalLength))
 
-    if keys[pygame.K_DOWN]:
-        path_radius -= 1
+    # keys = pygame.key.get_pressed()
+
+    # if keys[pygame.K_DOWN]:
+    #     path_radius -= 1
     
-    if keys[pygame.K_UP]:
-        path_radius += 1
+    # if keys[pygame.K_UP]:
+    #     path_radius += 1
 
-    if keys[pygame.K_LEFT]:
-        path_x -= 2
+    # if keys[pygame.K_LEFT]:
+    #     path_x -= 2
 
-    if keys[pygame.K_RIGHT]:
-        path_x += 2
+    # if keys[pygame.K_RIGHT]:
+    #     path_x += 2
 
-    return (path_x,path_radius)
+    # return (path_x,path_radius)
 
 
 def get_screen(x,y,bgWidth, bgHeight, radius):
@@ -69,46 +73,4 @@ def get_screen(x,y,bgWidth, bgHeight, radius):
             y + bgHeight if y <= radius else y - bgHeight))
 
     return possible
-
-if __name__ == '__main__':
-    bg = 100
-    test1 = get_screen(10,30,bg,bg,20)
-    output1 = [(0,10,30),(1,bg+10,30)]
-    if len(test1) != len(output1):
-        print("wrong length")
-    for t in test1:
-        if t not in output1:
-            print(f"wrong output1: {t}")
-
-    test2 = get_screen(bg-10,30,bg,bg,20)
-    output2 = [(0,bg-10,30),(1,-10,30)]
-    if len(test2) != len(output2):
-        print("wrong length")
-    for t in test2:
-        if t not in output2:
-            print(f"wrong output2: {t}")
-
-    test3 = get_screen(bg+10,30,bg,bg,20)
-    output3 = [(0,bg+10,30),(1,10,30)]
-    if len(test3) != len(output3):
-        print("wrong length")
-    for t in test3:
-        if t not in output3:
-            print(f"wrong output3: {t}")
-
-    test5 = get_screen(2*bg-10,30,bg,bg,20)
-    output5 = [(0,-10,30),(1,bg-10,30)]
-    if len(test5) != len(output5):
-        print("wrong length")
-    for t in test5:
-        if t not in output5:
-            print(f"wrong output5: {t}")
-
-    test4 = get_screen(50,50,bg,bg,20)
-    output4 = [(0,50,50)]
-    if len(test4) != len(output4):
-        print("wrong length")
-    for t in test4:
-        if t not in output4:
-            print(f"wrong output4: {t}")
     
