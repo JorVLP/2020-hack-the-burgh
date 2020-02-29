@@ -55,8 +55,10 @@ def endScreen():
 
         win.blit(bg, (0,0))
         largeFont = pygame.font.SysFont('comicsans', 80)
-        lastScore = largeFont.render('Best Score: ' + str(updateFile()),1,(255,255,255))
-        currentScore = largeFont.render('Score: '+ str(score),1,(255,255,255))
+        #lastScore = largeFont.render('Best Score: ' + str(updateFile()),1,(255,255,255))
+        #currentScore = largeFont.render('Score: '+ str(score),1,(255,255,255))
+        lastScore = largeFont.render('Best Score: ',1,(255,255,255))
+        currentScore = largeFont.render('Score: ',1,(255,255,255))
         win.blit(lastScore, (W/2 - lastScore.get_width()/2,150))
         win.blit(currentScore, (W/2 - currentScore.get_width()/2, 240))
         pygame.display.update()
@@ -94,8 +96,7 @@ PENG_HEIGHT = 110
 penguin = Player((win.get_width()-PENG_WIDTH)/2, win.get_height()-PENG_HEIGHT-30, 50, 50)
 
 obstacles = []
-pause = 0
-fallSpeed = 0
+game_over = False
 
 direction = 1
 last_dir_flip = 0
@@ -104,11 +105,8 @@ while run:
     delta_time = clock.get_time()/1000
     frame_time = pygame.time.get_ticks()
 
-    if pause > 0:
-        pause += 1
-        if pause > fallSpeed * 2:
-            endScreen()
-
+    if game_over:
+        endScreen()
 
     # scrolling of the background
     bg_ystart += 2
@@ -147,7 +145,7 @@ while run:
             last_dir_flip = frame_time
 
     if keys[pygame.K_DOWN]:
-        pass
+        game_over = True
 
     clock.tick(60)
     redrawWindow()
