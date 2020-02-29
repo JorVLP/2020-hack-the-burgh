@@ -1,5 +1,6 @@
 {
     "python.linting.pylintArgs": [
         "--unsafe-load-any-extension=y"
-    ]
+    ],
+    "python.pythonPath": "c:\\Users\\dawso\\repos\\2020-hack-the-burgh\\pengiunvenv\\Scripts\\python.exe"
 }
