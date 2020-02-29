@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 import os
 import random
+from PIL import Image
 
 pygame.init()
 
@@ -16,10 +17,12 @@ bg_yend = bg.get_width()
 clock = pygame.time.Clock()
 
 class player(object):
-    run = [pygame.image.load(os.path.join('images', str(x) + '.png')) for x in range(8, 16)]
+    goingLeft = pygame.image.load(os.path.join('images', 'penguinLeft.png'))
+    goingRight = pygame.image.load(os.path.join('images', 'penguinRight.png'))
+    run = pygame.image.load(os.path.join('images', 'penguinRight.png'))
     jump = [pygame.image.load(os.path.join('images', str(x) + '.png')) for x in range(1, 8)]
     slide = [pygame.image.load(os.path.join('images', 'S1.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')),pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S3.png')), pygame.image.load(os.path.join('images', 'S4.png')), pygame.image.load(os.path.join('images', 'S5.png'))]
-    fall = pygame.image.load(os.path.join('images', '0.png'))
+    fall = pygame.image.load(os.path.join('images', 'penguinRight.png'))
     jumpList = [1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,-1,-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4]
 
     def __init__(self, x, y, width, height):
@@ -69,7 +72,7 @@ class player(object):
         else:
             if self.runCount > 42:
                 self.runCount = 0
-            win.blit(self.run[self.runCount//6], (self.x,self.y))
+            win.blit(self.run, (self.x,self.y))
             self.runCount += 1
             self.hitbox = (self.x+ 4, self.y, self.width-24, self.height-13)
 
@@ -123,7 +126,7 @@ speed = 30
 score = 0
 
 run = True
-runner = player(200, 313, 64, 64)
+runner = player(100, 313, 64, 64)
 
 obstacles = []
 pause = 0
