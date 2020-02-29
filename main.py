@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import *
 import os
 import random
-from PIL import Image
 
 pygame.init()
 
@@ -16,6 +15,18 @@ bg_ystart = 0
 bg_yend = bg.get_height()
 
 clock = pygame.time.Clock()
+WHITE = (255, 255, 255)
+
+font_name = pygame.font.match_font('arial')
+
+def draw_text(surf, text, size, x, y):
+    font = pygame.font.Font(font_name, size)
+    text_surface = font.render(text, True, WHITE)
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (x, y)
+    surf.blit(text_surface, text_rect)
+
+
 
 class player(object):
     goingLeft = pygame.image.load(os.path.join('images', 'penguinLeft.png'))
