@@ -6,7 +6,7 @@ from PIL import Image
 
 pygame.init()
 
-W, H = 600, 900
+W, H = 600, 800
 win = pygame.display.set_mode((W,H))
 pygame.display.set_caption('Malfunctioning Penguin')
 
@@ -31,6 +31,7 @@ class player(object):
         self.y = y
         self.width = width
         self.height = height
+        self.goingLeft = True
         self.jumping = False
         self.sliding = False
         self.falling = False
@@ -40,7 +41,12 @@ class player(object):
         self.slideUp = False
 
     def draw(self, win):
-        if self.falling:
+        if self.goingLeft:
+            win.blit(self.goingLeft, (self.x, self.y))
+        elif not self.goingLeft:
+            win.blit(self.goingRight, (self.x, self.y))
+        
+        elif self.falling:
             win.blit(self.fall, (self.x, self.y + 30))
         elif self.jumping:
             self.y -= self.jumpList[self.jumpCount] * 1.3
@@ -129,7 +135,7 @@ pygame.time.set_timer(USEREVENT+2, 3000)
 score = 0
 
 run = True
-runner = player(100, 313, 64, 64)
+runner = player(250, 600, 50, 50)
 
 obstacles = []
 pause = 0
