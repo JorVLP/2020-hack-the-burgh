@@ -1,5 +1,5 @@
 {
     "python.linting.pylintArgs": [
-        "--extension-pkg-whitelist=lxml"
+        "--unsafe-load-any-extension=y"
     ]
 }
