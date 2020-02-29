@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 import os
 import random
-from Player import Player
+from player import Player
 import game_utils
 
 pygame.init()
