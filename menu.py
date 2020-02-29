@@ -7,8 +7,13 @@ import tkinter as tk
 from tkinter import filedialog
 from tkinter.filedialog import askopenfilename
 
+# The root window is created
+root = tk.Tk()
+root.withdraw()
+
 # Game Initialization
 pygame.init()
+pygame.mixer.init()
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 # Game Resolution
@@ -63,10 +68,15 @@ def main_menu():
                     selected="quit"
                 if event.key==pygame.K_SPACE:
                     if selected=="start":
-                        # global audio_file_name
-                        # audio_file_name = filedialog.askopenfilename(filetypes=(("Audio Files", ".wav .ogg"),   ("All Files", "*.*")))
+                        global audio_file_name
+                        audio_file_name = filedialog.askopenfilename(filetypes=(("Audio Files", ".wav .ogg"),   ("All Files", "*.*")))
+                        root.withdraw()
+                        root.destroy()
+                        #sounda= pygame.mixer.Sound(audio_file_name)
+                        #sounda.play()
                         # LINK TO MAIN
-                        print("Start")
+                        print("Start: " + audio_file_name)
+                        # sounda.stop()
                     if selected=="quit":
                         pygame.quit()
                         quit()
@@ -96,7 +106,5 @@ def main_menu():
         clock.tick(FPS)
         pygame.display.set_caption("Python - Pygame Simple Main Menu Selection")
 
-#root = tk.Tk()
-#root.filename =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
-#print (root.filename)
 main_menu()
+
