@@ -31,20 +31,20 @@ def get_screen(x,y,bgWidth, bgHeight, radius):
     if 1 in possible:
         possible.remove(1)
         possible.append((1,
-            x - bgWidth,
+            x + bgWidth if x <= radius else x - bgWidth,
             y if y <= bgHeight + radius else y - 2 * bgHeight))
     
     if 2 in possible: 
         possible.remove(2)
         possible.append((2,
             x if x <= bgWidth + radius else x - 2 * bgWidth,
-            y - bgHeight))
+            y + bgHeight if y <= radius else y - bgHeight))
 
     if 3 in possible:
         possible.remove(3)
         possible.append((3,
-            x - bgWidth,
-            y - bgHeight))
+            x + bgWidth if x <= radius else x - bgWidth,
+            y + bgHeight if y <= radius else y - bgHeight))
 
     return possible
 
