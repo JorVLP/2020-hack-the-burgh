@@ -31,7 +31,7 @@ class player(object):
         self.y = y
         self.width = width
         self.height = height
-        self.goingLeft = True
+        self.goLeft = True
         self.jumping = False
         self.sliding = False
         self.falling = False
@@ -41,9 +41,9 @@ class player(object):
         self.slideUp = False
 
     def draw(self, win):
-        if self.goingLeft:
+        if self.goLeft:
             win.blit(self.goingLeft, (self.x, self.y))
-        elif not self.goingLeft:
+        elif not self.goLeft:
             win.blit(self.goingRight, (self.x, self.y))
         
         elif self.falling:
