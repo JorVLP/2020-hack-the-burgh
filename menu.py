@@ -1,9 +1,11 @@
-import pygame.draw
 from pygame.locals import *
 import pygame
 import time
 import random
 import os
+import tkinter as tk
+from tkinter import filedialog
+from tkinter.filedialog import askopenfilename
 
 # Game Initialization
 pygame.init()
@@ -61,6 +63,9 @@ def main_menu():
                     selected="quit"
                 if event.key==pygame.K_SPACE:
                     if selected=="start":
+                        # global audio_file_name
+                        # audio_file_name = filedialog.askopenfilename(filetypes=(("Audio Files", ".wav .ogg"),   ("All Files", "*.*")))
+                        # LINK TO MAIN
                         print("Start")
                     if selected=="quit":
                         pygame.quit()
@@ -91,4 +96,7 @@ def main_menu():
         clock.tick(FPS)
         pygame.display.set_caption("Python - Pygame Simple Main Menu Selection")
 
+#root = tk.Tk()
+#root.filename =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
+#print (root.filename)
 main_menu()

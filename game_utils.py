@@ -1,4 +1,26 @@
-import numpy as np
+import pygame
+
+path_x, path_radius = (0,50)
+
+def plot_path(time):
+    global path_x, path_radius
+
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_DOWN]:
+        path_radius -= 1
+    
+    if keys[pygame.K_UP]:
+        path_radius += 1
+
+    if keys[pygame.K_LEFT]:
+        path_x -= 2
+
+    if keys[pygame.K_RIGHT]:
+        path_x += 2
+
+    return (path_x,path_radius)
+
 
 def get_screen(x,y,bgWidth, bgHeight, radius):
     possible = [i for i in range(4)]
