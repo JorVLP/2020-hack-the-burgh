@@ -18,7 +18,6 @@ bg_xend = bg.get_width()
 
 clock = pygame.time.Clock()
 WHITE = (255, 255, 255)
-
 font_name = pygame.font.match_font('arial')
 
 def draw_text(surf, text, size, x, y):
@@ -115,6 +114,8 @@ last_dir_flip = 0
 while run:
     delta_time = clock.get_time()/1000
     frame_time = pygame.time.get_ticks()
+
+    #draw_text(win, frame_time/1000, 18, 300, 10)
 
     if pause > 0:
         pause += 1
