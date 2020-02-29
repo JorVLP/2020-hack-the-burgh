@@ -99,7 +99,7 @@ pygame.draw.rect(backgrounds[3],Color(0,0,0),Rect(0,0,10,10))
 
 
 y_speed = 4
-x_speed = 0
+x_speed = 6
 
 screen_x = 0
 screen_y = 0
