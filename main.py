@@ -81,6 +81,7 @@ def redrawWindow():
     win.blit(bg, (bg_xend,bg_yend))
     win.blit(bg, (bg_xstart,bg_yend))
     win.blit(bg, (bg_xend,bg_ystart))
+    draw_text(win, str(round(frame_time/1000)), 25, 450, 10)
     
     penguin.draw(win)
     for obstacle in obstacles:
@@ -115,6 +116,8 @@ last_dir_flip = 0
 while run:
     delta_time = clock.get_time()/1000
     frame_time = pygame.time.get_ticks()
+
+
 
     if game_over:
         endScreen()
