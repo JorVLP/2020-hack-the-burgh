@@ -1,5 +1,6 @@
 import pygame
 import os
+import time
 
 
 # Game Initialization
@@ -47,16 +48,16 @@ def endScreen():
 
     menu=True
     selected="start"
- 
+    y_offset = 0
     while menu:
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 pygame.quit()
                 quit()
             if event.type==pygame.KEYDOWN:
-                if event.key==pygame.K_UP:
+                if event.key==pygame.K_LEFT:
                     selected="start"
-                elif event.key==pygame.K_DOWN:
+                elif event.key==pygame.K_RIGHT:
                     selected="quit"
                 if event.key==pygame.K_SPACE:
                     if selected=="start":
@@ -68,35 +69,41 @@ def endScreen():
  
         # Main Menu UI
         screen.fill(white)
-        title=text_format("Game", font, 150, red)
+        title=text_format("GAME", font, 150, red)
+        title2=text_format("OVER", font, 150, red)
         screen.blit(penguin_img, (0,0))
+
+        tear = pygame.image.load(os.path.join('images', 'tear.png'))
+        x_tear = 280
+        y_tear = 500
+        screen.blit(tear, (x_tear, y_tear+y_offset))
+        y_offset += 2
+        if y_offset >= 300:
+            y_offset = 0
+        
         if selected=="start":
-            text_start = text_format("START", font, 75, red)
-            text_file1 = text_format("(This game is procedurally generated from an audio file .wav,", font, 30, red)
-            text_file2 = text_format("so upload your favourite tune and glide away!)", font, 30, red)
+            text_start = text_format("RESTART", font, 75, red)
         else:
-            text_start = text_format("START", font, 75, black)
-            text_file1 = text_format("(This game is procedurally generated from an audio file .wav,", font, 30, black)
-            text_file2 = text_format("so upload your favourite tune and glide away!)", font, 30, black)
+            text_start = text_format("RESTART", font, 75, black)
         if selected=="quit":
             text_quit=text_format("QUIT", font, 75, red)
         else:
             text_quit = text_format("QUIT", font, 75, black)
  
         title_rect=title.get_rect()
+        title2_rect=title2.get_rect()
         start_rect=text_start.get_rect()
-        file1_rect=text_file1.get_rect()
-        file2_rect=text_file2.get_rect()
         quit_rect=text_quit.get_rect()
  
         # Main Menu Text
         screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
-        screen.blit(text_start, (screen_width/2 - (start_rect[2]/2), screen_height // 2 + 120))
-        screen.blit(text_file1, (220, screen_height // 2 + 170))
-        screen.blit(text_file2, (280, screen_height // 2 + 190))
-        screen.blit(text_quit, (screen_width/2 - (quit_rect[2]/2), screen_height // 2 + 250))
+        screen.blit(title2, (screen_width/2 - (title_rect[2]/2), 180))
+        screen.blit(text_start, (100, screen_height // 2 + 270))
+        screen.blit(text_quit, (790, screen_height // 2 + 270))
+
         pygame.display.update()
-        clock.tick(FPS)
-        pygame.display.set_caption("Malfunctioning Penguin - Music-Generated Gliding Game")
+    score = 0
+    clock.tick(FPS)
+    pygame.display.set_caption("Malfunctioning Penguin - Music-Generated Gliding Game")
 
 endScreen()
