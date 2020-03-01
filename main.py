@@ -8,6 +8,7 @@ import end_screen
 import menu
 
 pygame.init()
+pygame.mixer.init()
 
 W, H = 1024, 800
 win = pygame.display.set_mode((W,H))
@@ -30,6 +31,8 @@ while run:
             current_screen = "game_over"
                 
     if current_screen == "game_over":
+        sounda= pygame.mixer.Sound("./sounds/splash.wav")
+        sounda.play()
         restart = end_screen.endScreen(game_score)
         if restart:
             current_screen = "game_screen"
