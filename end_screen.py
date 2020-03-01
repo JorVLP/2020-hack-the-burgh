@@ -1,3 +1,11 @@
+from pygame.locals import *
+import pygame
+import time
+import random
+import os
+import tkinter as tk
+from tkinter import filedialog
+from tkinter.filedialog import askopenfilename
 
 def endScreen():
     global pause, score
@@ -23,4 +31,13 @@ def endScreen():
         win.blit(game_over, (W/2 - game_over.get_width()/2,150))
         win.blit(plushie, (W/2 - plushie.get_width()/2, 240))
         pygame.display.update()
+        tear = pygame.image.load(os.path.join('images', 'tear.png'))
+        x_tear = 512
+        y_tear = 400
+        for i in range(0, 400):
+            if i%4==0:
+                win.blit(tear, (x_tear, y_tear+(i/4)))
+                pygame.display.update()
     score = 0
+
+endScreen()
