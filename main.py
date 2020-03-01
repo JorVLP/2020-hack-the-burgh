@@ -8,7 +8,7 @@ import end_screen
 import menu
 
 pygame.init()
-pygame.mixer.init()
+#pygame.mixer.init()
 
 highest_score = 0
 
@@ -33,8 +33,9 @@ while run:
             current_screen = "game_over"
                 
     if current_screen == "game_over":
-        sounda= pygame.mixer.Sound("./sounds/splash.wav")
-        sounda.play()
+        #sounda= pygame.mixer.Sound("./sounds/splash.wav")
+        #sounda.play()
+        #sounda.stop()
         restart = end_screen.endScreen(game_score)
         if restart:
             current_screen = "game_screen"
