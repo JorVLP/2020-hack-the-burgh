@@ -91,7 +91,12 @@ class Game():
         if len(plot_list) == 1 and frame_time - self.last_decoration > 4000:
             print("hiiii")
             self.last_decoration = frame_time
-            self.backgrounds[plot_list[0][0]].blit(self.seals[random.randint(0,len(self.seals)-1)],((400 if random.randint(0,1) == 1 else -400) + plot_list[0][1]+ -100,plot_list[0][2]-200))
+            x_offset = (400 if random.randint(0,1) == 1 else -400) + random.randint(-100,100)
+
+            seal_plot_list = game_utils.get_screen(path_x + 512 + x_offset, -self.screen_y, self.bg_width, self.bg_height, 200)
+            seal = self.seals[random.randint(0,len(self.seals)-1)]
+            for (i, x, y) in seal_plot_list:
+                self.backgrounds[i].blit(  seal ,( x,y))
 
         # draw window
         self.backgrounds = self.backgrounds
