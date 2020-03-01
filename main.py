@@ -5,6 +5,7 @@ from player import Player
 from game import Game
 import game_utils
 import end_screen
+import win_screen
 import menu
 
 pygame.init()
@@ -18,13 +19,14 @@ pygame.display.set_caption('Malfunctioning Penguin')
 
 clock = pygame.time.Clock()
 
-start = menu.main_menu()
+music_filename = menu.main_menu()
 run = True
 current_screen = "game_screen"
 game = Game(win)
 
-pygame.mixer.music.load('./sounds/kevin.mp3')
-pygame.mixer.music.play(-1)
+print(music_filename)
+pygame.mixer.music.load(music_filename)
+pygame.mixer.music.play()
 
 
 while run:
@@ -33,8 +35,10 @@ while run:
 
     if current_screen == "game_screen":
         game_score = game.tick()
-        if game_score:
+        if game_score > 0:
             current_screen = "game_over"
+        elif game_score == -1:
+            win_screen.winScreen()
                 
     if current_screen == "game_over":
         restart = end_screen.endScreen(game_score)
