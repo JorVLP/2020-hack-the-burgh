@@ -25,7 +25,7 @@ game = Game(win)
 
 print(music_filename)
 pygame.mixer.music.load(music_filename)
-pygame.mixer.music.play(-1)
+pygame.mixer.music.play()
 
 
 while run:
