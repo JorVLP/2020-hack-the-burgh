@@ -32,7 +32,7 @@ def plot_path(time):
 
     grad2 = (path_function((time + 1)/1000) - path_function(time/1000))*100000000
 
-    newWidth = newWidth + int(200 * abs(grad - grad2))
+    newWidth = newWidth + int(150 * abs(grad - grad2)) - 100
 
 
     # return min(maxWidth, max(minWidth, newWidth))
