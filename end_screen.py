@@ -29,6 +29,7 @@ font = 'Retro'
 
 # Game image
 penguin_img = pygame.image.load("./images/penguinEnd.png")
+penguin_high_img = pygame.image.load("./images/penguinKindaHappy.png")
 
 # Game Framerate
 clock = pygame.time.Clock()
@@ -99,18 +100,23 @@ def endScreen(score=15):
         new_highest_score_text = text_format(("NEW HIGH SCORE!!!"), font, 100, red)
         DA_new_highest_score_text = text_format(str(best_score_ever), font, 150, red)
 
-        screen.fill(white)
+        
         title=text_format("GAME OVER", font, 150, red)
 
-        screen.blit(penguin_img, (0,0))
+        if (winner==False):
+            screen.fill(white)
+            screen.blit(penguin_img, (0,0))
 
-        tear = pygame.image.load(os.path.join('images', 'tear.png'))
-        x_tear = 280
-        y_tear = 500
-        screen.blit(tear, (x_tear, y_tear+y_offset))
-        y_offset += 2
-        if y_offset >= 300:
-            y_offset = 0
+            tear = pygame.image.load(os.path.join('images', 'tear.png'))
+            x_tear = 280
+            y_tear = 500
+            screen.blit(tear, (x_tear, y_tear+y_offset))
+            y_offset += 2
+            if y_offset >= 300:
+                y_offset = 0
+        else:
+            screen.fill(white)
+            screen.blit(penguin_high_img, (0,0))
         
         if selected=="start":
             text_start = text_format("RESTART", font, 75, red)
@@ -122,7 +128,6 @@ def endScreen(score=15):
             text_quit = text_format("QUIT", font, 75, black)
  
         title_rect=title.get_rect()
-        #title2_rect=title2.get_rect()
 
         highest_rect=highest_score_text.get_rect()
         score_rect=score_text.get_rect()
