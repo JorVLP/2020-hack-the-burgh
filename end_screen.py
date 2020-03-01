@@ -82,7 +82,7 @@ def endScreen():
  
         title_rect=title.get_rect()
         title2_rect=title2.get_rect()
-        start_rect=text_start.get_rect()
+        start_rect=text_start.get_rect()]
         quit_rect=text_quit.get_rect()
  
         # Main Menu Text
