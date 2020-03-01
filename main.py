@@ -21,10 +21,11 @@ bg_xstart = 0
 bg_xend = bg_width
 
 clock = pygame.time.Clock()
-WHITE = (255, 255, 255)
-font_name = pygame.font.match_font('arial')
+
 
 def draw_text(surf, text, size, x, y):
+    WHITE = (255, 255, 255)
+    font_name = pygame.font.match_font('arial')
     font = pygame.font.Font(font_name, size)
     text_surface = font.render(text, True, WHITE)
     text_rect = text_surface.get_rect()
@@ -38,7 +39,7 @@ def draw_text(surf, text, size, x, y):
 
 
 def endScreen():
-    global pause, score
+    global pause
     pause = 0
 
     run = True
@@ -61,7 +62,6 @@ def endScreen():
         win.blit(game_over, (W/2 - game_over.get_width()/2,150))
         win.blit(plushie, (W/2 - plushie.get_width()/2, 240))
         pygame.display.update()
-    score = 0
 
 def redrawWindow():
 
@@ -78,33 +78,23 @@ def redrawWindow():
     pygame.display.update()
 
 
-score = 0
 
 run = True
-PENG_WIDTH = 123
-PENG_HEIGHT = 110
-penguin = Player((win.get_width()-PENG_WIDTH)/2, win.get_height()-PENG_HEIGHT-30, 50, 50)
+penguin = Player(win)
 
 
 game_over = False
 
 direction = 1
 last_dir_flip = 0
-pygame.draw.rect(backgrounds[0],Color(255,0,0),Rect(0,0,10,10))
-pygame.draw.rect(backgrounds[1],Color(0,255,0),Rect(0,0,10,10))
-pygame.draw.rect(backgrounds[2],Color(0,0,255),Rect(0,0,10,10))
-pygame.draw.rect(backgrounds[3],Color(0,0,0),Rect(0,0,10,10))
-
 
 
 y_speed = 4
-x_speed = 6
+x_speed = 4
 
 screen_x = 0
 screen_y = 0
 
-path_radius = 50
-path_x = bg_width//2
 
 while run:
     delta_time = clock.get_time()/1000
