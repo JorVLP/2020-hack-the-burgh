@@ -1,6 +1,9 @@
 import pygame
-import python_util 
+import python_util
+import random
 
+factor = 1
+randomness = 0
 path_x, path_radius = (0,50)
 path_function, total_length = (0,0)
 
@@ -9,13 +12,15 @@ def set_func(music):
     path_function, total_length = python_util.getFun(music)
 
 def plot_path(time):
-    global path_x, path_radius, path_function, total_length
+    global path_x, path_radius, path_function, total_length, factor,randomness
     # print((path_function(time/1000)*10000))
-    grad = 0 if time == 0 else min(7, int((path_function(time/1000) - path_function((time - 1)/1000))*100000000), 200)
-    path_x = path_x + grad
-    return(path_x, 200)
-
-    # return (int(path_function(time/1000)*100000), 200)
+    grad = 0 if time == 0 else (path_function(time/1000) - path_function((time - 1)/1000))*100000000
+    if grad >= 7 or grad <= -7:
+        factor *= 0.999
+    if grad <= 0.05 and grad >= -0.05:
+        factor *= 1.001
+    randomness = max(-100, min(100, (randomness + random.randint(-2,2))))
+    return (int(path_function(time/1000)*100000*factor) + randomness, 200)
     
 
     

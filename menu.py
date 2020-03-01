@@ -14,7 +14,6 @@ root.withdraw()
 
 # Game Initialization
 pygame.init()
-pygame.mixer.init()
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 # Game Resolution
@@ -71,6 +70,7 @@ def main_menu():
                     if selected=="start":
                         global audio_file_name
                         audio_file_name = filedialog.askopenfilename(filetypes=(("Audio Files", ".wav .ogg .mp3"),   ("All Files", "*.*")))
+                        pygame.display.update()
                         game_utils.set_func(audio_file_name)
                         root.withdraw()
                         root.destroy()
@@ -116,5 +116,7 @@ def main_menu():
         pygame.display.set_caption("Malfunctioning Penguin - Music-Generated Gliding Game")
 
 if __name__ == '__main__':
+    pygame.mixer.music.load('sounds/PFUDOR.mp3')
+    pygame.mixer.music.play(-1)
     main_menu()
 
