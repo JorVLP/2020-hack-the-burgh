@@ -55,9 +55,9 @@ def endScreen():
                 pygame.quit()
                 quit()
             if event.type==pygame.KEYDOWN:
-                if event.key==pygame.K_UP:
+                if event.key==pygame.K_LEFT:
                     selected="start"
-                elif event.key==pygame.K_DOWN:
+                elif event.key==pygame.K_RIGHT:
                     selected="quit"
                 if event.key==pygame.K_SPACE:
                     if selected=="start":
@@ -73,9 +73,9 @@ def endScreen():
         title2=text_format("OVER", font, 150, red)
         screen.blit(penguin_img, (0,0))
         if selected=="start":
-            text_start = text_format("START", font, 75, red)
+            text_start = text_format("RESTART", font, 75, red)
         else:
-            text_start = text_format("START", font, 75, black)
+            text_start = text_format("RESTART", font, 75, black)
         if selected=="quit":
             text_quit=text_format("QUIT", font, 75, red)
         else:
@@ -89,10 +89,8 @@ def endScreen():
         # Main Menu Text
         screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
         screen.blit(title2, (screen_width/2 - (title_rect[2]/2), 180))
-        screen.blit(text_start, (screen_width/2 - (start_rect[2]/2), screen_height // 2 + 120))
-        #screen.blit(title, (220, screen_height // 2 + 170))
-        #screen.blit(title2, (280, screen_height // 2 + 190))
-        screen.blit(text_quit, (screen_width/2 - (quit_rect[2]/2), screen_height // 2 + 250))
+        screen.blit(text_start, (100, screen_height // 2 + 270))
+        screen.blit(text_quit, (790, screen_height // 2 + 270))
         pygame.display.update()
         tear = pygame.image.load(os.path.join('images', 'tear.png'))
         x_tear = 280

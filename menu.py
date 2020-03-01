@@ -72,11 +72,9 @@ def main_menu():
                         audio_file_name = filedialog.askopenfilename(filetypes=(("Audio Files", ".wav .ogg"),   ("All Files", "*.*")))
                         root.withdraw()
                         root.destroy()
-                        #sounda= pygame.mixer.Sound(audio_file_name)
-                        #sounda.play()
                         # LINK TO MAIN
                         print("Start: " + audio_file_name)
-                        # sounda.stop()
+                        return audio_file_name
                     if selected=="quit":
                         pygame.quit()
                         quit()
