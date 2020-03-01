@@ -5,6 +5,7 @@ from player import Player
 from game import Game
 import game_utils
 import end_screen
+import win_screen
 import menu
 
 pygame.init()
@@ -34,8 +35,10 @@ while run:
 
     if current_screen == "game_screen":
         game_score = game.tick()
-        if game_score:
+        if game_score > 0:
             current_screen = "game_over"
+        elif game_score == -1:
+            win_screen.winScreen()
                 
     if current_screen == "game_over":
         restart = end_screen.endScreen(game_score)
