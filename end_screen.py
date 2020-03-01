@@ -101,7 +101,8 @@ def endScreen(score=15):
         DA_new_highest_score_text = text_format(str(best_score_ever), font, 150, red)
 
         
-        title=text_format("GAME OVER", font, 150, red)
+        title=text_format("It's getting hotter and hotter in here...", font, 70, red)
+        title2=text_format("Please save my home!", font, 100, red)
 
         if (winner==False):
             screen.fill(white)
@@ -127,29 +128,31 @@ def endScreen(score=15):
         else:
             text_quit = text_format("QUIT", font, 75, black)
  
-        title_rect=title.get_rect()
+        title_rect = title.get_rect()
+        title2_rect = title2.get_rect()
 
-        highest_rect=highest_score_text.get_rect()
-        score_rect=score_text.get_rect()
+        highest_rect = highest_score_text.get_rect()
+        score_rect = score_text.get_rect()
 
         new_highest_rect = new_highest_score_text.get_rect()
         DA_new_highest_rect = highest_score_text.get_rect()
 
-        start_rect=text_start.get_rect()
-        quit_rect=text_quit.get_rect()
+        start_rect = text_start.get_rect()
+        quit_rect = text_quit.get_rect()
  
         # Main Menu Text
 
         if(winner==False):
-            screen.blit(title, (screen_width/2 - (title_rect[2]/2), 50))
-            screen.blit(highest_score_text, ((highest_rect[2]/6)-40, 200))
-            screen.blit(score_text, (screen_width - (score_rect[2]) - 20, 200))
+            screen.blit(title, (screen_width/2 - (title_rect[2]/2), 120))
+            screen.blit(title2, (screen_width/2 - (title_rect[2]/2) + 70, 180))
+            screen.blit(highest_score_text, ((highest_rect[2]/6)-40, 720))
+            screen.blit(score_text, (screen_width - (score_rect[2]) - 20, 720))
         else:
             screen.blit(new_highest_score_text, ((new_highest_rect[2]/4), 200))
             screen.blit(DA_new_highest_score_text, (screen_width/2 -60, 50))
 
-        screen.blit(text_start, (100, screen_height // 2 + 270))
-        screen.blit(text_quit, (790, screen_height // 2 + 270))
+        screen.blit(text_start, (100, 30))
+        screen.blit(text_quit, (790, 30))
 
         pygame.display.update()
     score = 0

@@ -32,7 +32,7 @@ class Game():
         self.flag = 0
         self.increment = 0
         self.last_decoration = 7000
-        filenames = ["seal.png"]
+        filenames = ["seal.png", "narwhal.png", "waterbottle.png", "garbage.png"]
         self.seals = [pygame.image.load(os.path.join('images', name)) for name in filenames] 
         pygame.draw.rect(self.backgrounds[0],Color(255,255,255),Rect(0,0,2048,2048))
         pygame.draw.rect(self.backgrounds[1],Color(255,255,255),Rect(0,0,2048,2048))
