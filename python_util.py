@@ -27,11 +27,13 @@ def getFun(music):
     print(time_list[-1])
     return (sp.CubicSpline(time_list, data), time)
 
-def getWidth(time, lastWidth, totalLength):
-    maxWidth = 50 - math.ceil((time / totalLength) * 40)
-    minWidth = maxWidth // 2
-    newWidth = lastWidth + rn.randint(-1,1)
-    return min(maxWidth, max(minWidth, newWidth))
+# def getWidth(time, lastWidth, totalLength):
+#     maxWidth = 50 - math.ceil((time / totalLength) * 40)
+#     minWidth = maxWidth // 2
+#     newWidth = lastWidth + rn.randint(-1,1)
+#     return min(maxWidth, max(minWidth, newWidth))
+
+
 
 if __name__ == '__main__':
     getFun("")
