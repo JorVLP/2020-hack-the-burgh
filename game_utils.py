@@ -10,8 +10,16 @@ def set_func(music):
 
 def plot_path(time):
     global path_x, path_radius, path_function, total_length
-    print((path_function(time/1000)*10000))
-    return (int(path_function(time/1000)*100000), 200)#int(python_util.getWidth(time, path_radius, total_length)))
+    # print((path_function(time/1000)*10000))
+    grad = 0 if time == 0 else min(7, int((path_function(time/1000) - path_function((time - 1)/1000))*100000000, 200))
+    path_x = path_x + grad
+    return(path_x, 200)
+
+    # return (int(path_function(time/1000)*100000), 200)
+    
+
+    
+    #int(python_util.getWidth(time, path_radius, total_length)))
 
     # keys = pygame.key.get_pressed()
 
