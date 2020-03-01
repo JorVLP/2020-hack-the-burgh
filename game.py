@@ -23,9 +23,10 @@ class Game():
         self.direction = 1
         self.y_speed = 4
         self.x_speed = 4
-        self.screen_x = 0
+        self.screen_x = self.bg_width//2
         self.screen_y = 0
         self.last_dir_flip = 0
+        #pygame.draw.rect(self.win,Color(255,255,255))
 
     def tick(self):
         frame_time = pygame.time.get_ticks()
@@ -69,7 +70,7 @@ class Game():
         # draw background
         frame_time = pygame.time.get_ticks()
         (path_x,path_radius) = game_utils.plot_path(frame_time)
-        plot_list = game_utils.get_screen(path_x,-self.screen_y,self.bg_width,self.bg_height,path_radius)
+        plot_list = game_utils.get_screen(path_x + 512,-self.screen_y,self.bg_width,self.bg_height,path_radius)
         for (i,x,y) in plot_list:
             pygame.draw.circle(self.backgrounds[i],Color(255,255,255),(x,y),path_radius)
 
@@ -81,9 +82,16 @@ class Game():
         self.win.blit(self.backgrounds[3], (self.bg_xend,    self.bg_yend))
         self.draw_text(str(round(frame_time/1000)), 25, self.win.get_width()-50, 10)
         
+        
+        game_over = self.is_game_over(self.win.get_at(self.penguin.center)) # must be before penguin draw
         self.penguin.draw(self.win)
         pygame.display.update()
-        return self.game_over
+        return game_over
+
+    def is_game_over(self,c):
+        print(c != Color(255,255,255,255))
+        return False
+
 
     def draw_text(self,text, size, x, y):
         WHITE = (255, 255, 255)
