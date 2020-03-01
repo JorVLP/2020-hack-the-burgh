@@ -112,7 +112,7 @@ def main_menu():
         screen.blit(text_quit, (screen_width/2 - (quit_rect[2]/2), screen_height // 2 + 250))
         pygame.display.update()
         clock.tick(FPS)
-        pygame.display.set_caption("Python - Pygame Simple Main Menu Selection")
+        pygame.display.set_caption("Malfunctioning Penguin - Music-Generated Gliding Game")
 
 main_menu()
 
