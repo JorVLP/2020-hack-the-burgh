@@ -1,29 +1,33 @@
 import pygame
-# import python_util 
+import python_util 
 
 path_x, path_radius = (0,50)
-# pathFunction, totalLength = python_util.getFun("./sounds/joakim_karud-rock_angel.wav")
+path_function, total_length = (0,0)
+
+def set_func(music):
+    global path_function, total_length
+    path_function, total_length = python_util.getFun(music)
 
 def plot_path(time):
-    global path_x, path_radius
+    global path_x, path_radius, path_function, total_length
+    print((path_function(time/1000)*10000))
+    return (int(path_function(time/1000)*100000), 200)#int(python_util.getWidth(time, path_radius, total_length)))
 
-    # return (pathFunction(time), python_util.getWidth(time, path_radius, totalLength))
+    # keys = pygame.key.get_pressed()
 
-    keys = pygame.key.get_pressed()
-
-    if keys[pygame.K_DOWN]:
-        path_radius -= 1
+    # if keys[pygame.K_DOWN]:
+    #     path_radius -= 1
     
-    if keys[pygame.K_UP]:
-        path_radius += 1
+    # if keys[pygame.K_UP]:
+    #     path_radius += 1
 
-    if keys[pygame.K_LEFT]:
-        path_x -= 2
+    # if keys[pygame.K_LEFT]:
+    #     path_x -= 2
 
-    if keys[pygame.K_RIGHT]:
-        path_x += 2
+    # if keys[pygame.K_RIGHT]:
+    #     path_x += 2
 
-    return (path_x,path_radius)
+    # return (path_x,path_radius)
 
 
 def get_screen(x,y,bgWidth, bgHeight, radius):

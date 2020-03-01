@@ -6,6 +6,7 @@ import os
 import tkinter as tk
 from tkinter import filedialog
 from tkinter.filedialog import askopenfilename
+import game_utils
 
 # The root window is created
 root = tk.Tk()
@@ -69,7 +70,8 @@ def main_menu():
                 if event.key==pygame.K_SPACE:
                     if selected=="start":
                         global audio_file_name
-                        audio_file_name = filedialog.askopenfilename(filetypes=(("Audio Files", ".wav .ogg"),   ("All Files", "*.*")))
+                        audio_file_name = filedialog.askopenfilename(filetypes=(("Audio Files", ".wav .ogg .mp3"),   ("All Files", "*.*")))
+                        game_utils.set_func(audio_file_name)
                         root.withdraw()
                         root.destroy()
                         # LINK TO MAIN

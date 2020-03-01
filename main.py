@@ -8,6 +8,7 @@ import end_screen
 import menu
 
 pygame.init()
+pygame.mixer.init()
 
 highest_score = 0
 
@@ -17,10 +18,15 @@ pygame.display.set_caption('Malfunctioning Penguin')
 
 clock = pygame.time.Clock()
 
+pygame.mixer.music.load("./sounds/PFUDOR.mp3")
+pygame.mixer.music.play()
+
 start = menu.main_menu()
 run = True
 current_screen = "game_screen"
 game = Game(win)
+
+
 
 while run:
     delta_time = clock.get_time()/1000
@@ -32,6 +38,9 @@ while run:
             current_screen = "game_over"
                 
     if current_screen == "game_over":
+        pygame.mixer.music.load("./sounds/splash.mp3")
+        pygame.mixer.music.play()
+        #sounda.stop()
         restart = end_screen.endScreen(game_score)
         if restart:
             current_screen = "game_screen"
