@@ -10,6 +10,8 @@ import menu
 pygame.init()
 pygame.mixer.init()
 
+highest_score = 0
+
 W, H = 1024, 800
 win = pygame.display.set_mode((W,H))
 pygame.display.set_caption('Malfunctioning Penguin')
