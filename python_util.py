@@ -10,9 +10,9 @@ import math
 def getFun(music):
     #sample_rate = 100
 
-    #filename = '/Users/gabi/Documents/penguin/joakim_karud-rock_angel.wav'
+    #music = './sounds/kevin.mp3'
     data, sample_rate = librosa.load(music, sr=100, mono=True, offset=0.0, res_type='kaiser_best')
-
+    print(data)
     data = np.array([i for i in data if i >= 0])
     time = len(data) // 100
     data = np.take(data, [i for i in range(time * 100)])
@@ -29,3 +29,6 @@ def getWidth(time, lastWidth, totalLength):
     minWidth = maxWidth // 2
     newWidth = lastWidth + rn.randint(-1,1)
     return min(maxWidth, max(minWidth, newWidth))
+
+if __name__ == '__main__':
+    getFun("")

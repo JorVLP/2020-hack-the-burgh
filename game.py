@@ -73,11 +73,11 @@ class Game():
             self.game_over = True
 
         # draw background
-        frame_time = pygame.time.get_ticks()
-        (path_x,path_radius) = game_utils.plot_path(frame_time)
-        plot_list = game_utils.get_screen(path_x + 512,-self.screen_y,self.bg_width,self.bg_height,path_radius)
-        for (i,x,y) in plot_list:
-            pygame.draw.circle(self.backgrounds[i],Color(255,255,255),(x,y),path_radius)
+        game_time = pygame.time.get_ticks() - self.game_start_time
+        (path_x, path_radius) = game_utils.plot_path(game_time)
+        plot_list = game_utils.get_screen(path_x + 512, -self.screen_y, self.bg_width, self.bg_height, path_radius)
+        for (i, x, y) in plot_list:
+            pygame.draw.circle(self.backgrounds[i], Color(255, 255, 255), (x, y), path_radius)
 
         # draw window
         self.backgrounds = self.backgrounds
