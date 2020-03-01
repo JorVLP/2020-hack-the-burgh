@@ -33,6 +33,7 @@ class Game():
         pygame.draw.rect(self.backgrounds[0],Color(0,0,0),Rect(0,0,2048,5))
         pygame.draw.rect(self.backgrounds[1],Color(0,0,0),Rect(0,0,2048,5))
 
+
     def tick(self):
         frame_time = pygame.time.get_ticks()
 
