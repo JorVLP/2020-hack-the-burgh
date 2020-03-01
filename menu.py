@@ -83,7 +83,7 @@ def main_menu():
         #screen.fill(white)
         screen.blit(background_img, (0,0))
         title=text_format("Malfunctioning Penguin", font, 90, blue)
-        screen.blit(penguin_img, (262, 120))
+        screen.blit(penguin_img, (262, 100))
         if selected=="start":
             text_start = text_format("START", font, 75, red)
             text_file1 = text_format("(This game is procedurally generated from an audio file .wav,", font, 30, red)

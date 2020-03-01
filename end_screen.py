@@ -40,7 +40,6 @@ def text_format(message, textFont, textSize, textColor):
     newText=newFont.render(message, 0, textColor)
     return newText
 
-
 def endScreen(score=0):
     pause = 0
     screen.fill(white)
@@ -70,11 +69,28 @@ def endScreen(score=0):
                         if selected=="quit":
                             pygame.quit()
                             quit()
- 
+        filename = "highscore"
+        score_file = open(filename,"rt")
+        best_score_ever = int(score_file.read())
+
+        if(score > best_score_ever):
+            best_score_ever = score
+            old_best_score = score_file.read()
+            old_best_score = old_best_score.replace(old_best_score, str(score))
+            score_file.close()
+
+            score_file = open(filename, "wt")
+            score_file.write(old_best_score)
+            score_file.close()
+
         # Main Menu UI
+        highest_score_text = text_format(("Highest Score: "+ str(best_score_ever)), font, 60, red)
+        score_text = text_format(("Your Score: " + str(score)), font, 60, red)
+        
         screen.fill(white)
-        title=text_format("GAME", font, 150, red)
+        title=text_format("GAME OVER", font, 150, red)
         title2=text_format("OVER", font, 150, red)
+
         screen.blit(penguin_img, (0,0))
 
         tear = pygame.image.load(os.path.join('images', 'tear.png'))
@@ -95,13 +111,19 @@ def endScreen(score=0):
             text_quit = text_format("QUIT", font, 75, black)
  
         title_rect=title.get_rect()
-        title2_rect=title2.get_rect()
+        #title2_rect=title2.get_rect()
+
+        highest_rect=highest_score_text.get_rect()
+        score_rect=score_text.get_rect()
+
         start_rect=text_start.get_rect()
         quit_rect=text_quit.get_rect()
  
         # Main Menu Text
-        screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
-        screen.blit(title2, (screen_width/2 - (title_rect[2]/2), 180))
+        screen.blit(title, (screen_width/2 - (title_rect[2]/2), 50))
+        screen.blit(highest_score_text, ((highest_rect[2]/6)-40, 200))
+        screen.blit(score_text, (screen_width - (score_rect[2]) - 20, 200))
+
         screen.blit(text_start, (100, screen_height // 2 + 270))
         screen.blit(text_quit, (790, screen_height // 2 + 270))
 
