@@ -39,12 +39,12 @@ while run:
             current_screen = "game_over"
         elif game_score == -1:
             effect = pygame.mixer.Sound("./sounds/applause.wav")
-            effect.play()
+            pygame.mixer.Sound.play(effect)
             win_screen.winScreen()
                 
     if current_screen == "game_over":
         effect = pygame.mixer.Sound("./sounds/splash_2.wav")
-        effect.play()
+        pygame.mixer.Sound.play(effect)
         restart = end_screen.endScreen(game_score)
         if restart:
             current_screen = "game_screen"
