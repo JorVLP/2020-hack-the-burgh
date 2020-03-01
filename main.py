@@ -36,17 +36,23 @@ while run:
     if current_screen == "game_screen":
         game_score = game.tick()
         if game_score > 0:
+            print("HHHHHHH")
+            pygame.mixer.music.stop()
             current_screen = "game_over"
         elif game_score == -1:
-            #pygame.mixer.music.load("./sounds/splash.mpeg")
-            #pygame.mixer.music.play()
+            pygame.mixer.music.stop()
+            effect = pygame.mixer.Sound("./sounds/applause.wav")
+            pygame.mixer.Sound.play(effect)
             win_screen.winScreen()
                 
     if current_screen == "game_over":
+        effect = pygame.mixer.Sound("./sounds/splash_2.wav")
+        pygame.mixer.Sound.play(effect)
         restart = end_screen.endScreen(game_score)
         if restart:
             current_screen = "game_screen"
             game = Game(win)
+            pygame.mixer.music.play()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

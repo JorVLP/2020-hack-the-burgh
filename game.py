@@ -28,6 +28,8 @@ class Game():
         self.last_dir_flip = 0
         self.game_start_time = pygame.time.get_ticks()
         self.score = 0
+        self.flag = 0
+        self.increment = 0
         pygame.draw.rect(self.backgrounds[0],Color(255,255,255),Rect(0,0,2048,2048))
         pygame.draw.rect(self.backgrounds[1],Color(255,255,255),Rect(0,0,2048,2048))
         pygame.draw.rect(self.backgrounds[0],Color(0,0,0),Rect(0,0,2048,5))
@@ -76,6 +78,9 @@ class Game():
         # draw background
         game_time = pygame.time.get_ticks() - self.game_start_time
         (path_x, path_radius) = game_utils.plot_path(game_time)
+        if self.flag == 1:
+            self.increment += 10
+            path_radius += self.increment
         plot_list = game_utils.get_screen(path_x + 512, -self.screen_y, self.bg_width, self.bg_height, path_radius)
         for (i, x, y) in plot_list:
             pygame.draw.circle(self.backgrounds[i], Color(255, 255, 255), (x, y), path_radius)
@@ -95,10 +100,13 @@ class Game():
         return game_over
 
     def is_game_over(self,c):
-        if c != Color(255,255,255,255) and  c != Color(255,255,255,255):
+        if c != Color(255,255,255,255) and  c != Color(0,0,0,255):
             return self.score
-        else:
-            return False
+        elif(self.flag == 1 and self.increment > 1800):
+            return -1
+        elif(game_utils.total_length < self.score+3):
+            self.flag = 1
+        return False
 
 
     def draw_text(self,text, size, x, y):
