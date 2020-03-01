@@ -62,6 +62,9 @@ class Game():
                 self.penguin.change_direction()
                 last_dir_flip = frame_time
 
+        if keys[pygame.K_DOWN]:
+            self.game_over = True
+
         # draw background
         frame_time = pygame.time.get_ticks()
         (path_x,path_radius) = game_utils.plot_path(frame_time)
@@ -71,14 +74,15 @@ class Game():
 
         # draw window
         self.backgrounds = self.backgrounds
-        win.blit(self.backgrounds[0], (self.bg_xstart,  self.bg_ystart))
-        win.blit(self.backgrounds[1], (self.bg_xend,    self.bg_ystart))
-        win.blit(self.backgrounds[2], (self.bg_xstart,  self.bg_yend))
-        win.blit(self.backgrounds[3], (self.bg_xend,    self.bg_yend))
-        self.draw_text(str(round(frame_time/1000)), 25, W-50, 10)
+        self.win.blit(self.backgrounds[0], (self.bg_xstart,  self.bg_ystart))
+        self.win.blit(self.backgrounds[1], (self.bg_xend,    self.bg_ystart))
+        self.win.blit(self.backgrounds[2], (self.bg_xstart,  self.bg_yend))
+        self.win.blit(self.backgrounds[3], (self.bg_xend,    self.bg_yend))
+        self.draw_text(str(round(frame_time/1000)), 25, self.win.get_width()-50, 10)
         
-        self.penguin.draw(win)
+        self.penguin.draw(self.win)
         pygame.display.update()
+        return self.game_over
 
     def draw_text(self,text, size, x, y):
         WHITE = (255, 255, 255)
