@@ -52,47 +52,40 @@ def winScreen(score=15):
     menu_startup_time = pygame.time.get_ticks()
     menu_delay_passed = False
     while menu:
-        if not menu_delay_passed:
-            if pygame.time.get_ticks() - menu_startup_time > 200:
-                menu_delay_passed = True
-        else:
-            for event in pygame.event.get():
-                if event.type==pygame.QUIT:
-                    pygame.quit()
-                    quit()
-                if event.type==pygame.KEYDOWN:
-                    if event.key==pygame.K_SPACE:
-                        if selected=="quit":
-                            pygame.quit()
-                            quit()
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_UP:
+                    selected="quit"
+                if event.key==pygame.K_DOWN:
+                    selected=""
+                if event.key==pygame.K_SPACE:
+                    if selected=="quit":
+                        pygame.quit()
+                        quit()
         
         # Main Menu UI
         if (winner==False):
             screen.fill(white)
             screen.blit(penguin_img, (0,0))
-
-            tear = pygame.image.load(os.path.join('images', 'tear.png'))
-            x_tear = 280
-            y_tear = 500
-            screen.blit(tear, (x_tear, y_tear+y_offset))
-            y_offset += 2
-            if y_offset >= 300:
-                y_offset = 0
         else:
             screen.fill(white)
             screen.blit(penguin_img, (0,0))
         
         if selected=="quit":
-            text_quit=text_format("QUIT", font, 75, red)
+            text_quit=text_format("QUIT", font, 50, red)
         else:
-            text_quit = text_format("QUIT", font, 75, red)
+            text_quit = text_format("QUIT", font, 50, black)
 
         quit_rect=text_quit.get_rect()
  
         # Main Menu Text
-        screen.blit(text_quit, (790, screen_height // 2 + 270))
+        screen.blit(text_quit, (20, 20))
 
         pygame.display.update()
+
     score = 0
     clock.tick(FPS)
     pygame.display.set_caption("Malfunctioning Penguin - Music-Generated Gliding Game")
