@@ -20,7 +20,7 @@ def getFun(music):
 
     data = np.reshape(data, (time, 100))
     data = np.array([np.mean(row) for row in data])
-    data = data / m
+    #data = data / m
     #time = [i for i in range(time)]
 
     #f = sp.CubicSpline(time, data)

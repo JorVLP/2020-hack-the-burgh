@@ -3,7 +3,7 @@ import python_util
 import random
 import math
 
-factor = 1
+factor = 0.6
 randomness = 0
 path_x, path_radius = (0,50)
 path_function, total_length = (0,0)
@@ -17,15 +17,15 @@ def plot_path(time):
     global path_x, path_radius, path_function, total_length, factor,randomness
     # print((path_function(time/1000)*10000))
     grad = 0 if time == 0 else (path_function(time/1000) - path_function((time - 1)/1000))*100000000
-    if grad >= 7 or grad <= -7:
-        factor *= 0.999
-    if grad <= 0.5 and grad >= -0.5:
-        factor *= 1.01
+    # if grad >= 7 or grad <= -7:
+    #     factor *= 1
+    # if grad <= 0.5 and grad >= -0.5:
+    #     factor *= 1.0
     randomness = max(-100, min(100, (randomness + random.randint(-2,2))))
 
 
 
-    maxWidth = 200 - math.ceil((time / 180000) * 40) # might want to check against songlength
+    maxWidth = 200 - math.ceil((time / 180000) * 200) # might want to check against songlength
     minWidth = maxWidth // 3
     newWidth = currentWidth + random.randint(-1,1)
 
