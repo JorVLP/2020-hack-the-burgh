@@ -25,11 +25,12 @@ while run:
     frame_time = pygame.time.get_ticks()
 
     if current_screen == "game_screen":
-        if game.tick():
+        game_score = game.tick()
+        if game_score:
             current_screen = "game_over"
                 
     if current_screen == "game_over":
-        restart = end_screen.endScreen()
+        restart = end_screen.endScreen(game_score)
         if restart:
             current_screen = "game_screen"
             game = Game(win)

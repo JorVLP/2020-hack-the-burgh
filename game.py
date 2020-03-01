@@ -26,6 +26,8 @@ class Game():
         self.screen_x = self.bg_width//2
         self.screen_y = 0
         self.last_dir_flip = 0
+        self.game_start_time = pygame.time.get_ticks()
+        self.score = 0
         pygame.draw.rect(self.backgrounds[0],Color(255,255,255),Rect(0,0,2048,2048))
         pygame.draw.rect(self.backgrounds[1],Color(255,255,255),Rect(0,0,2048,2048))
         pygame.draw.rect(self.backgrounds[0],Color(0,0,0),Rect(0,0,2048,5))
@@ -83,8 +85,8 @@ class Game():
         self.win.blit(self.backgrounds[1], (self.bg_xend,    self.bg_ystart))
         self.win.blit(self.backgrounds[2], (self.bg_xstart,  self.bg_yend))
         self.win.blit(self.backgrounds[3], (self.bg_xend,    self.bg_yend))
-        self.draw_text(str(round(frame_time/1000)), 25, self.win.get_width()-50, 10)
-        
+        self.draw_text(str(self.score), 25, self.win.get_width()-50, 10)
+        self.score = (pygame.time.get_ticks() - self.game_start_time)//1000
         
         game_over = self.is_game_over(self.win.get_at(self.penguin.center)) # must be before penguin draw
         self.penguin.draw(self.win)
@@ -92,7 +94,10 @@ class Game():
         return game_over
 
     def is_game_over(self,c):
-        return c != Color(255,255,255,255) and  c != Color(255,255,255,255)
+        if c != Color(255,255,255,255) and  c != Color(255,255,255,255):
+            return self.score
+        else:
+            return False
 
 
     def draw_text(self,text, size, x, y):

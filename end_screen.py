@@ -41,8 +41,7 @@ def text_format(message, textFont, textSize, textColor):
     return newText
 
 
-def endScreen():
-    global pause, score
+def endScreen(score=0):
     pause = 0
     screen.fill(white)
 
