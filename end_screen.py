@@ -48,7 +48,7 @@ def endScreen():
 
     menu=True
     selected="start"
- 
+    y_offset = 0
     while menu:
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
@@ -72,6 +72,15 @@ def endScreen():
         title=text_format("GAME", font, 150, red)
         title2=text_format("OVER", font, 150, red)
         screen.blit(penguin_img, (0,0))
+
+        tear = pygame.image.load(os.path.join('images', 'tear.png'))
+        x_tear = 280
+        y_tear = 500
+        screen.blit(tear, (x_tear, y_tear+y_offset))
+        y_offset += 2
+        if y_offset >= 300:
+            y_offset = 0
+        
         if selected=="start":
             text_start = text_format("RESTART", font, 75, red)
         else:
@@ -91,15 +100,8 @@ def endScreen():
         screen.blit(title2, (screen_width/2 - (title_rect[2]/2), 180))
         screen.blit(text_start, (100, screen_height // 2 + 270))
         screen.blit(text_quit, (790, screen_height // 2 + 270))
-        pygame.display.update()
-        tear = pygame.image.load(os.path.join('images', 'tear.png'))
-        x_tear = 280
-        y_tear = 500
 
-        for i in range(0, 1000000):
-            if i%10000==0:
-                screen.blit(tear, (x_tear, y_tear+(i/10000)))
-                pygame.display.update()
+        pygame.display.update()
     score = 0
     clock.tick(FPS)
     pygame.display.set_caption("Malfunctioning Penguin - Music-Generated Gliding Game")
