@@ -49,23 +49,28 @@ def endScreen():
     menu=True
     selected="start"
     y_offset = 0
+    menu_startup_time = pygame.time.get_ticks()
+    menu_delay_passed = False
     while menu:
-        for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-                pygame.quit()
-                quit()
-            if event.type==pygame.KEYDOWN:
-                if event.key==pygame.K_LEFT:
-                    selected="start"
-                elif event.key==pygame.K_RIGHT:
-                    selected="quit"
-                if event.key==pygame.K_SPACE:
-                    if selected=="start":
-                        # LINK TO MAIN
-                        print("Start")
-                    if selected=="quit":
-                        pygame.quit()
-                        quit()
+        if not menu_delay_passed:
+            if pygame.time.get_ticks() - menu_startup_time > 200:
+                menu_delay_passed = True
+        else:
+            for event in pygame.event.get():
+                if event.type==pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type==pygame.KEYDOWN:
+                    if event.key==pygame.K_LEFT:
+                        selected="start"
+                    elif event.key==pygame.K_RIGHT:
+                        selected="quit"
+                    if event.key==pygame.K_SPACE:
+                        if selected=="start":
+                            return (True)
+                        if selected=="quit":
+                            pygame.quit()
+                            quit()
  
         # Main Menu UI
         screen.fill(white)

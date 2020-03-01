@@ -5,6 +5,7 @@ from player import Player
 from game import Game
 import game_utils
 import end_screen
+import menu
 
 pygame.init()
 
@@ -12,7 +13,9 @@ W, H = 1024, 800
 win = pygame.display.set_mode((W,H))
 pygame.display.set_caption('Malfunctioning Penguin')
 
-clock = pygame.time.Clock() 
+clock = pygame.time.Clock()
+
+start = menu.main_menu()
 run = True
 current_screen = "game_screen"
 game = Game(win)
@@ -23,7 +26,13 @@ while run:
 
     if current_screen == "game_screen":
         if game.tick():
-            end_screen.endScreen()
+            current_screen = "game_over"
+                
+    if current_screen == "game_over":
+        restart = end_screen.endScreen()
+        if restart:
+            current_screen = "game_screen"
+            game = Game(win)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

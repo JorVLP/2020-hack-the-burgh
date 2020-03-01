@@ -26,7 +26,10 @@ class Game():
         self.screen_x = self.bg_width//2
         self.screen_y = 0
         self.last_dir_flip = 0
-        #pygame.draw.rect(self.win,Color(255,255,255))
+        pygame.draw.rect(self.backgrounds[0],Color(255,255,255),Rect(0,0,2048,2048))
+        pygame.draw.rect(self.backgrounds[1],Color(255,255,255),Rect(0,0,2048,2048))
+        pygame.draw.rect(self.backgrounds[0],Color(0,0,0),Rect(0,0,2048,5))
+        pygame.draw.rect(self.backgrounds[1],Color(0,0,0),Rect(0,0,2048,5))
 
     def tick(self):
         frame_time = pygame.time.get_ticks()
@@ -89,8 +92,7 @@ class Game():
         return game_over
 
     def is_game_over(self,c):
-        print(c != Color(255,255,255,255))
-        return False
+        return c != Color(255,255,255,255) and  c != Color(255,255,255,255)
 
 
     def draw_text(self,text, size, x, y):
