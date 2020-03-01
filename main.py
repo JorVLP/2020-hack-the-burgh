@@ -36,6 +36,8 @@ while run:
     if current_screen == "game_screen":
         game_score = game.tick()
         if game_score > 0:
+            print("HHHHHHH")
+            pygame.mixer.music.stop()
             current_screen = "game_over"
         elif game_score == -1:
             win_screen.winScreen()
@@ -45,6 +47,7 @@ while run:
         if restart:
             current_screen = "game_screen"
             game = Game(win)
+            pygame.mixer.music.play()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
