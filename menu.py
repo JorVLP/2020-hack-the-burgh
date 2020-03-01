@@ -74,7 +74,6 @@ def main_menu():
                         game_utils.set_func(audio_file_name)
                         root.withdraw()
                         root.destroy()
-                        # LINK TO MAIN
                         return audio_file_name
                     if selected=="quit":
                         pygame.quit()
@@ -87,11 +86,11 @@ def main_menu():
         screen.blit(penguin_img, (262, 100))
         if selected=="start":
             text_start = text_format("START", font, 75, red)
-            text_file1 = text_format("(This game is procedurally generated from an audio file .wav,", font, 30, red)
+            text_file1 = text_format("(This game is procedurally generated from an audio file,", font, 30, red)
             text_file2 = text_format("so upload your favourite tune and glide away!)", font, 30, red)
         else:
             text_start = text_format("START", font, 75, black)
-            text_file1 = text_format("(This game is procedurally generated from an audio file .wav,", font, 30, black)
+            text_file1 = text_format("(This game is procedurally generated from an audio file,", font, 30, black)
             text_file2 = text_format("so upload your favourite tune and glide away!)", font, 30, black)
         if selected=="quit":
             text_quit=text_format("QUIT", font, 75, red)

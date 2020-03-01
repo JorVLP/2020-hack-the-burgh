@@ -14,11 +14,13 @@ def getFun(music):
     data, sample_rate = librosa.load(music, sr=100, mono=True, offset=0.0, res_type='kaiser_best')
     print(data)
     data = np.array([i for i in data if i >= 0])
+    m = np.max(data)
     time = len(data) // 100
     data = np.take(data, [i for i in range(time * 100)])
 
     data = np.reshape(data, (time, 100))
-    data = [np.mean(row) for row in data]
+    data = np.array([np.mean(row) for row in data])
+    data = data / m
     #time = [i for i in range(time)]
 
     #f = sp.CubicSpline(time, data)
