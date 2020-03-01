@@ -19,7 +19,8 @@ def plot_path(time):
     grad = 0 if time == 0 else (path_function(time/1000) - path_function((time - 1)/1000))*100000000
     if grad >= 7 or grad <= -7:
         factor *= 0.999
-    if grad <= 0.05 and grad >= -0.05:
+    #if grad <= 0.05 and grad >= -0.05:
+    if grad <= 0.1 and grad >= -0.1:
         factor *= 1.001
     randomness = max(-100, min(100, (randomness + random.randint(-2,2))))
 
