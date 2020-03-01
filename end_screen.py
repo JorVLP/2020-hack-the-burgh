@@ -104,7 +104,7 @@ def endScreen():
                 win.blit(tear, (x_tear, y_tear+(i/4)))
                 pygame.display.update()
     score = 0
-        clock.tick(FPS)
-        pygame.display.set_caption("Malfunctioning Penguin - Music-Generated Gliding Game")
+    clock.tick(FPS)
+    pygame.display.set_caption("Malfunctioning Penguin - Music-Generated Gliding Game")
 
 endScreen()
