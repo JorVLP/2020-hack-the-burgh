@@ -93,7 +93,7 @@ class Game():
             self.last_decoration = frame_time
             x_offset = (400 if random.randint(0,1) == 1 else -400) + random.randint(-100,100)
 
-            seal_plot_list = game_utils.get_screen(path_x + 512 + x_offset, -self.screen_y, self.bg_width, self.bg_height, 200)
+            seal_plot_list = game_utils.get_screen(path_x + 512 + x_offset, -self.screen_y, self.bg_width, self.bg_height, 500)
             seal = self.seals[random.randint(0,len(self.seals)-1)]
             for (i, x, y) in seal_plot_list:
                 self.backgrounds[i].blit(  seal ,( x,y))
