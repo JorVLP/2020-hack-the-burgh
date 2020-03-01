@@ -104,7 +104,7 @@ class Game():
             return self.score
         elif(self.flag == 1 and self.increment > 1800):
             return -1
-        elif(game_utils.total_length < self.score):
+        elif(game_utils.total_length < self.score+3):
             self.flag = 1
         return False
 
