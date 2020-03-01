@@ -75,7 +75,6 @@ def main_menu():
                         root.withdraw()
                         root.destroy()
                         # LINK TO MAIN
-                        print("Start: " + audio_file_name)
                         return audio_file_name
                     if selected=="quit":
                         pygame.quit()
