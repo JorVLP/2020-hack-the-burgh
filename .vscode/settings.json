@@ -2,5 +2,5 @@
     "python.linting.pylintArgs": [
         "--unsafe-load-any-extension=y"
     ],
-    "python.pythonPath": "./pengiunvenv/Scripts/python"
+    "python.pythonPath": "/usr/local/bin/python3"
 }
