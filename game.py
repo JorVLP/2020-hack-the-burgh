@@ -102,12 +102,11 @@ class Game():
     def is_game_over(self,c):
         if c != Color(255,255,255,255) and  c != Color(0,0,0,255):
             return self.score
-        elif(self.flag == 1 and self.increment > 180):
+        elif(self.flag == 1 and self.increment > 1800):
             return -1
         elif(game_utils.total_length < self.score):
             self.flag = 1
-        else:    
-            return False
+        return False
 
 
     def draw_text(self,text, size, x, y):

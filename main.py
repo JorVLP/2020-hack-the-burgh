@@ -40,6 +40,7 @@ while run:
             pygame.mixer.music.stop()
             current_screen = "game_over"
         elif game_score == -1:
+            pygame.mixer.music.stop()
             #pygame.mixer.music.load("./sounds/splash.mpeg")
             #pygame.mixer.music.play()
             win_screen.winScreen()
