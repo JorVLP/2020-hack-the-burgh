@@ -37,8 +37,8 @@ font = 'Retro'
 
 
 # Game image
-penguin_img = pygame.transform.scale(pygame.image.load("./images/penguinTitle.png"), (460,460))
-
+background_img = pygame.image.load("./images/icy_background.png")
+penguin_img = pygame.image.load(os.path.join('images', 'penguinTitle.png'))
 
 # Game Framerate
 clock = pygame.time.Clock()
@@ -80,7 +80,8 @@ def main_menu():
                         quit()
  
         # Main Menu UI
-        screen.fill(white)
+        #screen.fill(white)
+        screen.blit(background_img, (0,0))
         title=text_format("Malfunctioning Penguin", font, 90, blue)
         screen.blit(penguin_img, (262, 120))
         if selected=="start":
