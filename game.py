@@ -3,6 +3,7 @@ import game_utils
 from pygame.locals import Color,Rect
 import os
 from player import Player
+import random
 
 
 
@@ -30,6 +31,9 @@ class Game():
         self.score = 0
         self.flag = 0
         self.increment = 0
+        self.last_decoration = 7000
+        filenames = ["seal.png"]
+        self.seals = [pygame.image.load(os.path.join('images', name)) for name in filenames] 
         pygame.draw.rect(self.backgrounds[0],Color(255,255,255),Rect(0,0,2048,2048))
         pygame.draw.rect(self.backgrounds[1],Color(255,255,255),Rect(0,0,2048,2048))
         pygame.draw.rect(self.backgrounds[0],Color(0,0,0),Rect(0,0,2048,5))
@@ -84,6 +88,10 @@ class Game():
         plot_list = game_utils.get_screen(path_x + 512, -self.screen_y, self.bg_width, self.bg_height, path_radius)
         for (i, x, y) in plot_list:
             pygame.draw.circle(self.backgrounds[i], Color(255, 255, 255), (x, y), path_radius)
+        if len(plot_list) == 1 and frame_time - self.last_decoration > 4000:
+            print("hiiii")
+            self.last_decoration = frame_time
+            self.backgrounds[plot_list[0][0]].blit(self.seals[random.randint(0,len(self.seals)-1)],((400 if random.randint(0,1) == 1 else -400) + plot_list[0][1]+ -100,plot_list[0][2]-200))
 
         # draw window
         self.backgrounds = self.backgrounds
