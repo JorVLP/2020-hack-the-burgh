@@ -1,5 +1,6 @@
 import pygame
 import os
+import time
 
 
 # Game Initialization
@@ -82,23 +83,24 @@ def endScreen():
  
         title_rect=title.get_rect()
         title2_rect=title2.get_rect()
-        start_rect=text_start.get_rect()]
+        start_rect=text_start.get_rect()
         quit_rect=text_quit.get_rect()
  
         # Main Menu Text
         screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
         screen.blit(title2, (screen_width/2 - (title_rect[2]/2), 180))
         screen.blit(text_start, (screen_width/2 - (start_rect[2]/2), screen_height // 2 + 120))
-        screen.blit(text_file1, (220, screen_height // 2 + 170))
-        screen.blit(text_file2, (280, screen_height // 2 + 190))
+        #screen.blit(title, (220, screen_height // 2 + 170))
+        #screen.blit(title2, (280, screen_height // 2 + 190))
         screen.blit(text_quit, (screen_width/2 - (quit_rect[2]/2), screen_height // 2 + 250))
         pygame.display.update()
         tear = pygame.image.load(os.path.join('images', 'tear.png'))
-        x_tear = 512
-        y_tear = 400
-        for i in range(0, 400):
-            if i%4==0:
-                win.blit(tear, (x_tear, y_tear+(i/4)))
+        x_tear = 280
+        y_tear = 500
+
+        for i in range(0, 1000000):
+            if i%10000==0:
+                screen.blit(tear, (x_tear, y_tear+(i/10000)))
                 pygame.display.update()
     score = 0
     clock.tick(FPS)
