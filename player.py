@@ -13,8 +13,8 @@ class Player(object):
         self.width = self.face_left.get_width()
         self.height = self.face_left.get_height()
         self.go_left = True
+        self.center = (win.get_width()//2,win.get_height()-30-(self.PENG_HEIGHT//2))
 
-    
     def change_direction(self):
         self.go_left = not self.go_left
 

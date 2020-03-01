@@ -106,4 +106,5 @@ def endScreen():
     clock.tick(FPS)
     pygame.display.set_caption("Malfunctioning Penguin - Music-Generated Gliding Game")
 
-endScreen()
+if __name__ == '__main__':
+    endScreen()
