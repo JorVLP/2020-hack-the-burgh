@@ -112,5 +112,6 @@ def main_menu():
         clock.tick(FPS)
         pygame.display.set_caption("Malfunctioning Penguin - Music-Generated Gliding Game")
 
-main_menu()
+if __name__ == '__main__':
+    main_menu()
 
