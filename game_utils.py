@@ -1,11 +1,13 @@
 import pygame
 import python_util
 import random
+import math
 
 factor = 1
 randomness = 0
 path_x, path_radius = (0,50)
 path_function, total_length = (0,0)
+currentWidth = 200
 
 def set_func(music):
     global path_function, total_length
@@ -20,7 +22,22 @@ def plot_path(time):
     if grad <= 0.05 and grad >= -0.05:
         factor *= 1.001
     randomness = max(-100, min(100, (randomness + random.randint(-2,2))))
-    return (int(path_function(time/1000)*100000*factor) + randomness, 200)
+
+
+
+    maxWidth = 200 - math.ceil((time / 180000) * 40) # might want to check against songlength
+    minWidth = maxWidth // 2
+    newWidth = currentWidth + random.randint(-1,1)
+
+    grad2 = (path_function((time + 1)/1000) - path_function(time/1000))*100000000
+
+    newWidth = newWidth + 50 * abs(grad - grad2)
+
+
+    # return min(maxWidth, max(minWidth, newWidth))
+
+
+    return (int(path_function(time/1000)*100000*factor) + randomness, min(maxWidth, max(minWidth, newWidth)))
     
 
     
