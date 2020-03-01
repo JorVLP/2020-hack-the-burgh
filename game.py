@@ -25,6 +25,7 @@ class Game():
         self.x_speed = 4
         self.screen_x = 0
         self.screen_y = 0
+        self.last_dir_flip = 0
 
     def tick(self):
         frame_time = pygame.time.get_ticks()
@@ -57,10 +58,10 @@ class Game():
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_SPACE]:
-            if frame_time - last_dir_flip > 200:
+            if frame_time - self.last_dir_flip > 200:
                 self.direction *= -1
                 self.penguin.change_direction()
-                last_dir_flip = frame_time
+                self.last_dir_flip = frame_time
 
         if keys[pygame.K_DOWN]:
             self.game_over = True
