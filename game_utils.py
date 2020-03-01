@@ -27,7 +27,7 @@ def plot_path(time):
 
     maxWidth = 150 - math.ceil((time / 180000) * 200) # might want to check against songlength
     minWidth = maxWidth // 3
-    newWidth = currentWidth + random.randint(-1,1)
+    newWidth = currentWidth + random.randint(-2,2)
 
     grad2 = (path_function((time + 1)/1000) - path_function(time/1000))*100000000
 
