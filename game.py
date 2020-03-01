@@ -32,7 +32,7 @@ class Game():
         self.flag = 0
         self.increment = 0
         self.last_decoration = 7000
-        filenames = ["seal.png", "narwhal.png", "waterbottle.png", "garbage.png","sealRight.png", "narwhalRight.png"]
+        filenames = ["seal.png", "narwhal.png", "waterbottle.png", "garbage.png","sealRight.png"]
         self.seals = [pygame.image.load(os.path.join('images', name)) for name in filenames] 
         pygame.draw.rect(self.backgrounds[0],Color(255,255,255),Rect(0,0,2048,2048))
         pygame.draw.rect(self.backgrounds[1],Color(255,255,255),Rect(0,0,2048,2048))
@@ -91,7 +91,7 @@ class Game():
         if len(plot_list) == 1 and frame_time - self.last_decoration > 4000:
             print("hiiii")
             self.last_decoration = frame_time
-            x_offset = (400 if random.randint(0,1) == 1 else -400) + random.randint(-100,100)
+            x_offset = (500 if random.randint(0,1) == 1 else -500) + random.randint(-100,100)
 
             seal_plot_list = game_utils.get_screen(path_x + 512 + x_offset, -self.screen_y, self.bg_width, self.bg_height, 500)
             seal = self.seals[random.randint(0,len(self.seals)-1)]
