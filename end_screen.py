@@ -94,8 +94,8 @@ def endScreen(score=15):
 
         # Main Menu UI
 
-        highest_score_text = text_format(("Highest Score: "+ str(best_score_ever)), font, 60, red)
-        score_text = text_format(("Your Score: " + str(score)), font, 60, red)
+        highest_score_text = text_format(("Highest Score: "+ str(best_score_ever)), font, 60, black)
+        score_text = text_format(("Your Score: " + str(score)), font, 60, black)
 
         new_highest_score_text = text_format(("NEW HIGH SCORE!!!"), font, 100, red)
         DA_new_highest_score_text = text_format(str(best_score_ever), font, 150, red)
